@@ -13,6 +13,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "micro": "^9.1.0",
     "mongoose": "^5.0.1",
     "next": "^4.2.3",
