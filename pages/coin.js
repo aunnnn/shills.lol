@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { Layout, TldrItem } from '../components'
+import { Layout, TldrItem, TldrInput } from '../components'
 
 export default class extends Component {
   renderTldr = () => {
@@ -17,7 +17,10 @@ export default class extends Component {
               <h1>{this.props.url.query.symbol}</h1>
             </div>
             <div className='col-md-9'>
-              {this.renderTldr()}
+              <TldrInput />
+              <ul className="list-group">
+                {this.renderTldr()}
+              </ul>
             </div>
           </div>
         </div>
