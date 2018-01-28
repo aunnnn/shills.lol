@@ -30,7 +30,7 @@ export default class extends Component {
       return this.state.coins
         .filter(coin => {
           const name = coin.name.toLowerCase()
-          const symbol = coin.name.toLowerCase()
+          const symbol = coin.symbol.toLowerCase()
           const inputCoin = this.state.inputCoin.toLowerCase()
 
           return name.indexOf(inputCoin) >= 0 || symbol.indexOf(inputCoin) >= 0
