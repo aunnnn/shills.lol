@@ -11,11 +11,23 @@ export default class extends Component {
   }
 
   componentDidMount () {
-    axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=0')
-      .then(res => this.setState({
-        coins: res.data,
+    const coins = localStorage.getItem('coins')
+
+    if (coins) {
+      this.setState({
+        coins: JSON.parse(coins),
         fetchingCoins: false
-      }))
+      })
+    } else {
+      axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=0')
+        .then(res => {
+          localStorage.setItem('coins', JSON.stringify(res.data))
+          this.setState({
+            coins: res.data,
+            fetchingCoins: false
+          })
+        })
+    }
   }
 
   changeText = (e) => {
