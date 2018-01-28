@@ -11,7 +11,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "dev-server": "micro-dev",
+    "dev-server": "micro-dev -p 64529",
     "start-server": "micro"
   },
   "dependencies": {
