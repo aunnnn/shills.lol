@@ -16,13 +16,15 @@ const voteDefinition = async (req, res) => {
     }
   } else if (vote_type === 'down') {
     updateCommand = {
-      $dec
+      $inc: {
+        downvotes: 1
+      }
     }
   } else {
     throw new Error("vote_type must either be 'up' or 'down'")
   }
 
-  Definition.update({ _id: def_id }, )
+  const result = await Definition.update({ _id: def_id }, updateCommand)
   send(res, 200, {
     definition: savedDefinition
   })
