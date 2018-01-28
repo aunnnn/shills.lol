@@ -1,7 +1,11 @@
-const { router, get } = require('microrouter')
+const { router, get, post } = require('microrouter')
 const connectDB = require('./server/utils/connectDB')
-const hello = require('./server/services/hello')
 const safe = require('./server/utils/safeMethod')
+
+// Services
+const hello = require('./server/services/hello')
+const getAllLists = require('./server/services/getAllLists')
+const addDefinition = require('./server/services/addDefinition')
 
 connectDB()
 
@@ -11,8 +15,10 @@ const serviceStatus = (req, res) => {
   })
 }
 
-const handler = router(
-  safe(get)('/hello', hello)
+const server = router(
+  safe(get)('/hello', hello),
+  safe(get)('/lists', getAllLists),
+  safe(post)('/definitions', addDefinition)
 )
 
-module.exports = handler
+module.exports = server
