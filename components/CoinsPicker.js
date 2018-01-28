@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
+import API from '../utils/APIService'
 
 export default class extends Component {
   state = {
@@ -19,11 +20,12 @@ export default class extends Component {
         fetchingCoins: false
       })
     } else {
-      axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=0')
+      API.getAllLists()
         .then(res => {
-          localStorage.setItem('coins', JSON.stringify(res.data))
+          const coins = res.data.all_lists
+          localStorage.setItem('coins', JSON.stringify(coins))
           this.setState({
-            coins: res.data,
+            coins,
             fetchingCoins: false
           })
         })
