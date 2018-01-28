@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = "http://localhost:64000"
+const BASE_URL = "https://api.whatsthatcoin.aunnnn.com"
 
 const urlWithPath = (path) => `${BASE_URL}${path}`
 
