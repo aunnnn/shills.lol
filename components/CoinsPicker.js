@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Router from 'next/router'
 import axios from 'axios'
 
 export default class extends Component {
@@ -21,8 +22,9 @@ export default class extends Component {
     this.setState({ inputCoin: e.target.value })
   }
 
-  changeFocus = (e) => {
-    console.log(e)
+  selectCoin = (symbol) => {
+    Router.push(`/coin?symbol=${symbol}`)
+    this.setState({ focused: false })
   }
 
   renderCoins = () => {
@@ -37,8 +39,9 @@ export default class extends Component {
         })
         .map(coin => (
           <li
-            key={coin.id}
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
+            onClick={() => this.selectCoin(coin.symbol)}
+            key={coin.id}
           >
             {coin.name}
             <span className="badge badge-primary badge-pill">{coin.symbol}</span>
@@ -65,12 +68,11 @@ export default class extends Component {
               value={this.state.inputCoin}
               onChange={this.changeText}
               onFocus={() => this.setState({ focused: true })}
-              onBlur={() => this.setState({ focused: false })}
             />
           </div>
         </div>
 
-        <ul className='list-group'>
+        <ul className='list-group mb-5'>
           {this.renderCoins()}
         </ul>
         
