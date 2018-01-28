@@ -5,6 +5,7 @@ const getAllLists = async (req, res) => {
   const limitN = req.query.limit
   const data = await List.find({}, {
     _id: 0,
+    cmc_id: 1,
     name: 1,
     symbol: 1,
     rank: 1,

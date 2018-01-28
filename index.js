@@ -1,4 +1,6 @@
 const { router, get, post } = require('microrouter')
+const cors = require('micro-cors')()
+
 const connectDB = require('./server/utils/connectDB')
 const safe = require('./server/utils/safeMethod')
 
@@ -34,4 +36,4 @@ const server = router(
   safe(get)('/_refreshCoinLists', refreshCoinLists)
 )
 
-module.exports = server
+module.exports = cors(server)
