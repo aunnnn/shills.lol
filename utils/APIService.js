@@ -25,7 +25,7 @@ const addNewDefinition = (list_id, text) => {
 
 const voteDefinition = (def_id, vote_type) => {
   if (vote_type !== "up" || vote_type !== "down") { 
-    console.log("Error! vote_type must be either 'up' or 'down'")
+    console.error("Error! vote_type must be either 'up' or 'down'")
     return null
   }
   return axios.post(urlWithPath(`/vote`), {

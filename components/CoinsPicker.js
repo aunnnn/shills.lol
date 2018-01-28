@@ -55,7 +55,7 @@ export default class extends Component {
           <li
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
             onClick={() => this.selectCoin(coin.symbol)}
-            key={coin.id}
+            key={coin.cmc_id}
             style={{ cursor: 'pointer' }}
           >
             {coin.name}
