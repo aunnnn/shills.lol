@@ -6,7 +6,7 @@ const DefinitionSchema = Schema({
   
   list_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    ref: 'List'
   },
 
   text: {
@@ -37,4 +37,6 @@ const initCollection = () => {
   }
 }
 
-module.exports = initCollection()
+const model = initCollection()
+model.Schema = DefinitionSchema
+module.exports = model
