@@ -59,7 +59,14 @@ export default class extends Component {
             style={{ cursor: 'pointer' }}
           >
             {coin.name}
-            <span className="badge badge-primary badge-pill">{coin.symbol}</span>
+            <span
+              className="badge badge-primary badge-pill">{coin.symbol}
+            </span>
+            <style jsx>{`
+              .badge {
+                margin-left: 10px;
+              }
+            `}</style>
           </li>
         ))
     }
@@ -71,29 +78,33 @@ export default class extends Component {
     }
 
     return (
-      <div>
-        <div className='col-auto'>
-          <div className='input-group mb-2'>
-            <div className='input-group-prepend'>
-              <div className='input-group-text'>🔎</div>
-            </div>
-            <input
-              type='text' className='form-control'
-              id='inlineFormInputGroup' placeholder="What's the name of THAT COIN"
-              value={this.state.inputCoin}
-              onChange={this.changeText}
-              onFocus={() => this.setState({ focused: true })}
-            />
+      <div style={{ width: '100%' }}>
+        <div className='input-group'>
+          <div className='input-group-prepend'>
+            <div className='input-group-text'>🔎</div>
           </div>
+          <input
+            type='text' className='form-control'
+             placeholder="What's the name of THAT COIN?"
+            value={this.state.inputCoin}
+            onChange={this.changeText}
+            onFocus={() => this.setState({ focused: true })}
+          />
         </div>
 
-        <ul className='list-group mb-5'>
+        <ul className='list-group'>
           {this.renderCoins()}
         </ul>
         
         <style jsx>{`
+          .list-group {
+            min-width: 250px;
+            position: absolute;
+            z-index: 999;
+          }
           .list-group-item {
             cursor: pointer !important;
+            width: 100%;
           }
         `}</style>
       </div>
