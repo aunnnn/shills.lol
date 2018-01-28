@@ -8,8 +8,19 @@ const ListSchema = Schema({
   name: String,
   symbol: String,
 
-  
-  definitions: []
+  definitionsSubmitted: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Definition'
+    }
+  ],
+
+  tags: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Tag'
+    }
+  ]
 })
 
 const initCollection = () => {
