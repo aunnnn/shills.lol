@@ -23,9 +23,13 @@ export default class extends Component {
   renderCoins = () => {
     if (this.state.inputCoin) {
       return this.state.coins
-        .filter(coin => (
-          coin.name.indexOf(this.state.inputCoin) >= 0 || coin.symbol.indexOf(this.state.inputCoin) >= 0
-        ))
+        .filter(coin => {
+          const name = coin.name.toLowerCase()
+          const symbol = coin.name.toLowerCase()
+          const inputCoin = this.state.inputCoin.toLowerCase()
+
+          return name.indexOf(inputCoin) >= 0 || symbol.indexOf(inputCoin) >= 0
+        })
         .map(coin => (
           <li
             key={coin.name}
