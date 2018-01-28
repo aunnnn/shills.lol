@@ -1,14 +1,8 @@
 export default () => (
   <div>
-    <div className='header'>
+    <div className='text-center py-5'>
       <h1>What's THAT COIN?</h1>
       <p>TLDR of THAT COIN you're seeking</p>
     </div>
-    <style jsx>{`
-      .header {
-        text-align: center;
-        padding: 50px 0;
-      }
-    `}</style>
   </div>
 )
