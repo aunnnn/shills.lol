@@ -1,9 +1,13 @@
+const { send } = require('micro')
+
 const handleErrors = fn => async (req, res) => {
   try {
     return await fn(req, res)
   } catch (err) {
     console.log(err.stack)
-    send(res, 500, 'Internal error: ' + err)
+    send(res, 500, {
+      message: '[Error] ' + err
+    })
   }
 }
 
