@@ -38,10 +38,10 @@ export default class extends Component {
         .map(coin => (
           <li
             key={coin.id}
-            className='list-group-item list-group-item-action'
+            className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
           >
             {coin.name}
-            <span class="badge badge-primary badge-pill">{coin.symbol}</span>
+            <span className="badge badge-primary badge-pill">{coin.symbol}</span>
           </li>
         ))
     }
@@ -75,8 +75,8 @@ export default class extends Component {
         </ul>
         
         <style jsx>{`
-          .list-group-item a {
-            cursor: pointer;
+          .list-group-item {
+            cursor: pointer !important;
           }
         `}</style>
       </div>
