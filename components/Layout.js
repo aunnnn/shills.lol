@@ -11,11 +11,15 @@ export default ({ children }) => (
     </Head>
     <div className='py-3'>
       <div className='container'>
-        <IndexHeader />
+        <div className='row'>
+          <div className='col-md-6'>
+            <IndexHeader />
+          </div>
 
-        <div className='row justify-content-center'>
-          <div className='col-6'>
-            <CoinsPicker />
+          <div className='col-md-6'>
+            <div className='d-flex align-items-center' style={{ height: '100%' }}>
+              <CoinsPicker />
+            </div>
           </div>
         </div>
       </div>
