@@ -1,0 +1,15 @@
+{
+  "name": "WhatsTheCoin",
+  "version": "1.0.0",
+  "description": "tldr cryptos",
+  "main": "index.js",
+  "repository": "https://github.com/aunnnn/WhatsTheCoin.git",
+  "author": "aunnnn, jeojoe",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "next": "^4.2.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
