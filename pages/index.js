@@ -1,3 +1,7 @@
+import { IndexHeader } from '../components'
+
 export default () => (
-  <div>sdfkjsdkfj</div>
+  <div>
+    <IndexHeader />
+  </div>
 )
