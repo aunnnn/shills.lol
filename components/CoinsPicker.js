@@ -42,6 +42,7 @@ export default class extends Component {
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
             onClick={() => this.selectCoin(coin.symbol)}
             key={coin.id}
+            style={{ cursor: 'pointer' }}
           >
             {coin.name}
             <span className="badge badge-primary badge-pill">{coin.symbol}</span>
