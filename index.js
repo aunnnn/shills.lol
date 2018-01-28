@@ -7,6 +7,9 @@ const hello = require('./server/services/hello')
 const getAllLists = require('./server/services/getAllLists')
 const getIntroLists = require('./server/services/getIntroLists')
 const addDefinition = require('./server/services/addDefinition')
+const getList = require('./server/services/getList')
+
+// Admin Services
 const refreshCoinLists = require('./server/services/admin/refreshCoinLists')
 
 connectDB()
@@ -21,6 +24,7 @@ const server = router(
   safe(get)('/', () => "hello!"),
   safe(get)('/hello', hello),
   safe(get)('/lists', getAllLists),
+  safe(get)('/lists/:symbol', getList),
   safe(get)('/intro_lists', getIntroLists),
   safe(post)('/definitions', addDefinition),
 

@@ -7,7 +7,7 @@ const addDefinition = async (req, res) => {
   
   const list = await List.findOne({ _id: body.list_id })
   if (!list) { throw Error("No list with given id found.") }
-  console.log(`Adding list..${list.submitted_definitions}`)
+
   const definition = new Definition({
     list_id: list._id,
     text: body.text,
@@ -16,8 +16,10 @@ const addDefinition = async (req, res) => {
   })
   
   const savedDefinition = await definition.save()
+  
   list.submitted_definitions.push(savedDefinition._id)
   await list.save()
+
   send(res, 200, {
     definition: savedDefinition
   })
