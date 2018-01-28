@@ -16,6 +16,7 @@ const serviceStatus = (req, res) => {
 }
 
 const server = router(
+  safe(get)('/', () => "hello!"),
   safe(get)('/hello', hello),
   safe(get)('/lists', getAllLists),
   safe(post)('/definitions', addDefinition)

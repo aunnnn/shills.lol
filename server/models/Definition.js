@@ -2,10 +2,17 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const DefinitionSchema = Schema({
-  _id: Schema.Types.ObjectId,
+const DefinitionSchema = Schema({  
+  
+  list_id: {
+    type: Schema.Types.ObjectId,
+    required: true
+  },
 
-  text: String,
+  text: {
+    type: String,
+    required: true    
+  },
 
   upvotes: {
     type: Number,

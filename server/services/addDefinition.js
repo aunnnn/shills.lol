@@ -3,8 +3,9 @@ const Definition = require('../models/Definition')
 
 const addDefinition = async (req, res) => {
   const body = await json(req)
+  
   const definition = new Definition({
-    text: String,
+    text: body.text,
     upvotes: 0,
     downvotes: 0
   })
