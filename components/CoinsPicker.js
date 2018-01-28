@@ -5,7 +5,8 @@ export default class extends Component {
   state = {
     coins: null,
     inputCoin: '',
-    fetchingCoins: true
+    fetchingCoins: true,
+    focused: false
   }
 
   componentDidMount () {
@@ -20,8 +21,12 @@ export default class extends Component {
     this.setState({ inputCoin: e.target.value })
   }
 
+  changeFocus = (e) => {
+    console.log(e)
+  }
+
   renderCoins = () => {
-    if (this.state.inputCoin) {
+    if (this.state.inputCoin && this.state.focused) {
       return this.state.coins
         .filter(coin => {
           const name = coin.name.toLowerCase()
@@ -32,9 +37,11 @@ export default class extends Component {
         })
         .map(coin => (
           <li
-            key={coin.name}
+            key={coin.id}
+            className='list-group-item list-group-item-action'
           >
-            <a>{coin.name}</a>
+            {coin.name}
+            <span class="badge badge-primary badge-pill">{coin.symbol}</span>
           </li>
         ))
     }
@@ -57,18 +64,19 @@ export default class extends Component {
               id='inlineFormInputGroup' placeholder="What's the name of THAT COIN"
               value={this.state.inputCoin}
               onChange={this.changeText}
+              onFocus={() => this.setState({ focused: true })}
+              onBlur={() => this.setState({ focused: false })}
             />
           </div>
         </div>
 
-        <ul>
+        <ul className='list-group'>
           {this.renderCoins()}
         </ul>
         
         <style jsx>{`
-          .list-group {
-            position: absolute;
-            width: 100%;
+          .list-group-item a {
+            cursor: pointer;
           }
         `}</style>
       </div>
