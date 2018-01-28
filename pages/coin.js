@@ -5,7 +5,7 @@ export default class extends Component {
   render () {
     return (
       <Layout>
-        <div className='container'>example</div>
+        <h1>{this.props.url.query.symbol}</h1>
       </Layout>
     )
   }

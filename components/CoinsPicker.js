@@ -1,40 +1,63 @@
 import { Component } from 'react'
+import Router from 'next/router'
 import axios from 'axios'
 
 export default class extends Component {
   state = {
     coins: null,
     inputCoin: '',
-    fetchingCoins: true
+    fetchingCoins: true,
+    focused: false
   }
 
   componentDidMount () {
-    axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=0')
-      .then(res => this.setState({
-        coins: res.data,
+    const coins = localStorage.getItem('coins')
+
+    if (coins) {
+      this.setState({
+        coins: JSON.parse(coins),
         fetchingCoins: false
-      }))
+      })
+    } else {
+      axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=0')
+        .then(res => {
+          localStorage.setItem('coins', JSON.stringify(res.data))
+          this.setState({
+            coins: res.data,
+            fetchingCoins: false
+          })
+        })
+    }
   }
 
   changeText = (e) => {
     this.setState({ inputCoin: e.target.value })
   }
 
+  selectCoin = (symbol) => {
+    Router.push(`/coin?symbol=${symbol}`)
+    this.setState({ focused: false })
+  }
+
   renderCoins = () => {
-    if (this.state.inputCoin) {
+    if (this.state.inputCoin && this.state.focused) {
       return this.state.coins
         .filter(coin => {
           const name = coin.name.toLowerCase()
-          const symbol = coin.name.toLowerCase()
+          const symbol = coin.symbol.toLowerCase()
           const inputCoin = this.state.inputCoin.toLowerCase()
 
           return name.indexOf(inputCoin) >= 0 || symbol.indexOf(inputCoin) >= 0
         })
         .map(coin => (
           <li
-            key={coin.name}
+            className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
+            onClick={() => this.selectCoin(coin.symbol)}
+            key={coin.id}
+            style={{ cursor: 'pointer' }}
           >
-            <a>{coin.name}</a>
+            {coin.name}
+            <span className="badge badge-primary badge-pill">{coin.symbol}</span>
           </li>
         ))
     }
@@ -57,18 +80,18 @@ export default class extends Component {
               id='inlineFormInputGroup' placeholder="What's the name of THAT COIN"
               value={this.state.inputCoin}
               onChange={this.changeText}
+              onFocus={() => this.setState({ focused: true })}
             />
           </div>
         </div>
 
-        <ul>
+        <ul className='list-group mb-5'>
           {this.renderCoins()}
         </ul>
         
         <style jsx>{`
-          .list-group {
-            position: absolute;
-            width: 100%;
+          .list-group-item {
+            cursor: pointer !important;
           }
         `}</style>
       </div>
