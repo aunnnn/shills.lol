@@ -1,8 +1,8 @@
 const { router, get, post } = require('microrouter')
 const cors = require('micro-cors')()
 
-const connectDB = require('./server/utils/connectDB')
-const safe = require('./server/utils/safeMethod')
+const connectDB = require('./server/core/connectDB')
+const safe = require('./server/core/safeMethod')
 
 // Services
 const hello = require('./server/services/hello')
