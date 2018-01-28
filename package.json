@@ -10,14 +10,20 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "dev-server": "micro-dev",
+    "start-server": "micro"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "micro": "^9.1.0",
+    "microrouter": "^3.0.0",
     "mongoose": "^5.0.1",
     "next": "^4.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "micro-dev": "^2.2.0"
   }
 }
