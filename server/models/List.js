@@ -39,4 +39,6 @@ const initCollection = () => {
   }
 }
 
-module.exports = initCollection()
+const model = initCollection()
+model.Schema = ListSchema
+module.exports = model
