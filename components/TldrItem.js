@@ -5,7 +5,7 @@ export default class extends Component {
     upvotes: 0,
     downvotes: 0,
     localScore: 0,
-    maxCap: 10,
+    maxCap: 100,
   }
 
   vote = (vote) => {
