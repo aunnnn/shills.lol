@@ -6,7 +6,7 @@ const DefinitionSchema = Schema({
   
   list_id: {
     type: Schema.Types.ObjectId,
-    required: true
+    ref: 'List'
   },
 
   text: {

@@ -4,10 +4,19 @@ const Schema = mongoose.Schema
 
 const ListSchema = Schema({
 
+  // From CMC
+  cmc_id: String,
   name: String,
-  symbol: String,
+  symbol: String,  
+  rank: Number,
+  percent_change_24h: Number,
+  percent_change_7d: Number,
+  price_usd: Number,
+  price_btc: Number,
+  market_cap_usd: Number,
+  cmc_last_updated: String,
 
-  definitionsSubmitted: [
+  submitted_definitions: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Definition'
@@ -17,7 +26,7 @@ const ListSchema = Schema({
   tags: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Tag'
+      ref: 'Tag',
     }
   ]
 })
