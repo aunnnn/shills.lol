@@ -1,12 +1,27 @@
 import { Component } from 'react'
+import APIService from '../utils/APIService'
 
-export default class extends Component {
+class TldrInput extends Component {
   state = {
-    text: ''
+    text: '',
+    submitting: false
   }
 
   changeText = (e) => {
     this.setState({ text: e.target.value })
+  }
+
+  submit = (e) => {
+    if (this.state.submitting) return
+
+    e.preventDefault()
+    
+    this.setState({ submitting: true })
+    APIService.addNewDefinition(this.props.id, this.state.text)
+      .then(res => {
+        this.setState({ text: '', submitting: false })
+        console.log(res)
+      })
   }
 
   render () {
@@ -22,10 +37,17 @@ export default class extends Component {
             />
           </div>
           <div className='col-auto'>
-            <button type="submit" className="btn btn-primary mb-2">Submit</button>
+            <button
+              type="submit" className="btn btn-primary mb-2"
+              onClick={this.submit}
+            >
+              {this.state.submitting ? 'Submitting..' : 'Submit'}
+            </button>
           </div>
         </div>
       </form>
     )
   }
 }
+
+export default TldrInput
