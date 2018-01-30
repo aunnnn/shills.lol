@@ -41,7 +41,8 @@ export default class extends Component {
     return (
       <div className='item'>
         <div className={`def def-${this.props.no}`}>
-          {this.props.no + 1}. {this.props.text}
+          {!this.props.noNum && `${this.props.no + 1}. `}
+          {this.props.text}
         </div>
         <div className='vote-wrapper d-flex flex-row align-items-stretch'>
           <a

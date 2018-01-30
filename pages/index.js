@@ -26,16 +26,15 @@ class Index extends Component {
             <span>|</span>
           </div>
           <div className='col-md-6'>
-            {list.submitted_definitions.map((def, i) => (
-              <TldrItem
-                key={def._id}
-                coin_id={def.list_id}
-                downvotes={def.downvotes}
-                upvotes={def.upvotes}
-                text={def.text}
-                no={i}
-              />
-            ))}
+            <TldrItem
+              key={list.submitted_definitions[0]._id}
+              coin_id={list.submitted_definitions[0].list_id}
+              downvotes={list.submitted_definitions[0].downvotes}
+              upvotes={list.submitted_definitions[0].upvotes}
+              text={list.submitted_definitions[0].text}
+              no={0}
+              noNum
+            />
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               <a className='see-all'>See all {list.symbol}'s TL;DRs..</a>
             </Link>
