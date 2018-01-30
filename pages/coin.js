@@ -30,6 +30,7 @@ export default class extends Component {
     return this.state.coin.submitted_definitions.map((def, i) => {
       return <TldrItem
         key={def._id}
+        def_id={def._id}
         coin_id={def.list_id}
         downvotes={def.downvotes}
         upvotes={def.upvotes}
