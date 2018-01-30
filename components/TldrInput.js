@@ -34,7 +34,7 @@ class TldrInput extends Component {
           <div className='col'>
             <input
               type="text"
-              className="form-control form-control-lg" placeholder="Do you have any tldr for this coin?"
+              className="form-control form-control-lg" placeholder={`Do you have any tldr for ${this.props.coin_symbol}?`}
               value={this.state.text}
               onChange={this.changeText}
               onKeyPress={this.onKeyPress}
