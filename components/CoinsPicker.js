@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
-import fuzzy from 'fuzzysearch'
+import fuzzy from '../utils/fuzzy'
 import API from '../utils/APIService'
 
 export default class extends Component {
