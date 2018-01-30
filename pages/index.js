@@ -20,7 +20,7 @@ class Index extends Component {
             <span>|</span>
           </div>
           <div className='col-6 col-md-2 d-flex justify-content-between'>
-            <Link href={`/coin?symbol=${list.symbol}`}>
+            <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               {list.symbol}
             </Link>
             <span>|</span>
@@ -33,7 +33,7 @@ class Index extends Component {
                 </div>
               </div>
             ))}
-            <Link href={`/coin?symbol=${list.symbol}`}>
+            <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               <a className='see-all'>See all {list.symbol}'s TL;DRs..</a>
             </Link>
           </div>
