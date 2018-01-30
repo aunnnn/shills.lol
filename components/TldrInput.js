@@ -11,6 +11,10 @@ class TldrInput extends Component {
     this.setState({ text: e.target.value })
   }
 
+  onKeyPress = (e) => {
+    if (e.key == 'Enter') this.submit(e)
+  }
+
   submit = (e) => {
     if (this.state.submitting) return
 
@@ -20,25 +24,25 @@ class TldrInput extends Component {
     APIService.addNewDefinition(this.props.id, this.state.text)
       .then(res => {
         this.setState({ text: '', submitting: false })
-        console.log(res)
       })
   }
 
   render () {
     return (
-      <form className='mb-4'>
+      <form className='mb-3'>
         <div className='form-row'>
           <div className='col'>
             <input
               type="text"
-              className="form-control" placeholder="Do you have any tldr for this coin?"
+              className="form-control form-control-lg" placeholder="Do you have any tldr for this coin?"
               value={this.state.text}
               onChange={this.changeText}
+              onKeyPress={this.onKeyPress}
             />
           </div>
           <div className='col-auto'>
             <button
-              type="submit" className="btn btn-primary mb-2"
+              type="submit" className="btn btn-primary btn-lg mb-2"
               onClick={this.submit}
             >
               {this.state.submitting ? 'Submitting..' : 'Submit'}
