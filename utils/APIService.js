@@ -24,7 +24,7 @@ const addNewDefinition = (list_id, text) => {
   })
 }
 
-const voteDefinition = (def_id, vote_type) => {
+const voteDefinition = (def_id, vote_type, vote_amount=1) => {
   if (vote_type !== "up" && vote_type !== "down") { 
     console.error("Error! vote_type must be either 'up' or 'down'")
     return null
@@ -32,6 +32,7 @@ const voteDefinition = (def_id, vote_type) => {
   return axios.post(urlWithPath(`/vote`), {
     def_id,
     vote_type,
+    vote_amount,
   })
 }
 

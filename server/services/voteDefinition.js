@@ -6,18 +6,19 @@ const voteDefinition = async (req, res) => {
   
   const def_id = body.def_id
   const vote_type = body.vote_type
+  const vote_amount = body.vote_amount || 1
 
   var updateCommand;
   if (vote_type === 'up') {
     updateCommand = {
       $inc: {
-        upvotes: 1
+        upvotes: vote_amount
       }
     }
   } else if (vote_type === 'down') {
     updateCommand = {
       $inc: {
-        downvotes: 1
+        downvotes: vote_amount
       }
     }
   } else {

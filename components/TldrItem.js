@@ -1,18 +1,43 @@
 import { Component } from 'react'
+import APIService from '../utils/APIService';
+import { debounce } from 'lodash';
 
 export default class extends Component {
+
+  constructor(props) {
+    super(props)
+
+    // Decrease amount of API calls by aggregating amount and call once.
+    this.callUpvoteAPI = debounce(this._callVoteAPI('up'), 1000)
+    this.callDownvoteAPI = debounce(this._callVoteAPI('down'), 1000)
+    console.log(this.callUpvoteAPI)
+  }
+
+  numberOfUpvoteActionsLeftToServer = 0
+  numberOfDownvoteActionsLeftToServer = 0
+
   state = {
-    upvotes: 0,
-    downvotes: 0,
+    userUpvotes: 0,
+    userDownvotes: 0,
     localScore: 0,
     hitMaxTimes: 0,
     maxCap: 20,
   }
 
-  vote = (vote) => {
+  _callVoteAPI = (vote_type) => () => {
+    const vote_amount = vote_type === 'up' ? this.numberOfUpvoteActionsLeftToServer : this.numberOfDownvoteActionsLeftToServer
+    if (vote_type === 'up') {
+      this.numberOfUpvoteActionsLeftToServer = 0
+    } else {
+      this.numberOfDownvoteActionsLeftToServer = 0
+    }
+    APIService.voteDefinition(this.props.def_id, vote_type, vote_amount)
+  }
+
+  vote = (vote_type) => {
     const { localScore, maxCap } = this.state
 
-    if (this.state.upvotes + this.state.downvotes >= 20) {
+    if (this.state.userUpvotes + this.state.userDownvotes >= 20) {
       this.setState(prev => ({ hitMaxTimes: prev.hitMaxTimes }))
       if (this.state.hitMaxTimes <= 3) {
         alert('Vote up to 20 votes.')
@@ -22,11 +47,16 @@ export default class extends Component {
       return
     }
 
-    if (vote === 'up') {
-      this.setState(prev => ({ upvotes: prev.upvotes + 1, localScore: prev.localScore + 1 }))
-    } else {
-      this.setState(prev => ({ downvotes: prev.downvotes + 1, localScore: prev.localScore - 1 }))
+    if (vote_type === 'up') {
+      this.numberOfUpvoteActionsLeftToServer += 1
+      this.setState(prev => ({ userUpvotes: prev.userUpvotes + 1, localScore: prev.localScore + 1 }))
+      this.callUpvoteAPI()
+    } else if (vote_type === 'down') {
+      this.numberOfDownvoteActionsLeftToServer += 1
+      this.setState(prev => ({ userDownvotes: prev.userDownvotes + 1, localScore: prev.localScore - 1 }))
+      this.callDownvoteAPI()
     }
+    console.log('vote: ', vote_type)
   }
 
   kFormatter = (num) => {
@@ -34,7 +64,7 @@ export default class extends Component {
   }
 
   render () {
-    const { upvotes, downvotes, localScore, maxCap } = this.state
+    const { userUpvotes, userDownvotes, localScore, maxCap } = this.state
     const upOpacity = localScore > 0 ? localScore/maxCap : 0
     const downOpacity = localScore < 0 ? (-localScore)/maxCap : 0
 
@@ -49,12 +79,12 @@ export default class extends Component {
             className='vote up'
             onClick={() => this.vote('up')}
             style={{ backgroundColor: `rgba(39, 174, 96, ${upOpacity})`}}
-          >👍 {this.state.upvotes !== 0 && '+'}{this.kFormatter(this.state.upvotes)}</a>
+          >👍 {this.state.userUpvotes !== 0 && '+'}{this.kFormatter(this.state.userUpvotes + this.props.upvotes)}</a>
           <a
             className='vote down'
             onClick={() => this.vote('down')}
             style={{ backgroundColor: `rgba(231, 76, 60, ${downOpacity})`}}
-          >👎 {this.state.downvotes !== 0 && '-'}{this.kFormatter(this.state.downvotes)}</a>
+          >👎 {this.state.userDownvotes !== 0 && '-'}{this.kFormatter(this.state.userDownvotes + this.props.downvotes)}</a>
         </div>
         <style jsx>{`
           .item {
