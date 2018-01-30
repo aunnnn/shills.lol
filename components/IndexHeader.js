@@ -4,7 +4,7 @@ export default () => (
   <div>
     <div className='text-center py-4'>
       <Link href='/'>
-        <h1>What's THAT COIN?</h1>
+        <h1>Explain that COIN like i'm 5 🧒</h1>
       </Link>
       <p className='font-italic'>TLDR of THAT COIN you're seeking</p>
     </div>
