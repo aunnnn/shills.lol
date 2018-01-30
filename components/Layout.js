@@ -26,10 +26,5 @@ export default ({ children }) => (
 
       {children}
     </div>
-    <style jsx global>{`
-      * {
-        font-family: monospace !important;
-      }
-    `}</style>
   </div>
 )
