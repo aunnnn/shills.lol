@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import APIService from '../utils/APIService';
 import { debounce } from 'lodash';
+import moment from 'moment';
 
 export default class extends Component {
 
@@ -10,7 +11,6 @@ export default class extends Component {
     // Decrease amount of API calls by aggregating amount and call once.
     this.callUpvoteAPI = debounce(this._callVoteAPI('up'), 1000)
     this.callDownvoteAPI = debounce(this._callVoteAPI('down'), 1000)
-    console.log(this.callUpvoteAPI)
   }
 
   numberOfUpvoteActionsLeftToServer = 0
@@ -56,7 +56,6 @@ export default class extends Component {
       this.setState(prev => ({ userDownvotes: prev.userDownvotes + 1, localScore: prev.localScore - 1 }))
       this.callDownvoteAPI()
     }
-    console.log('vote: ', vote_type)
   }
 
   kFormatter = (num) => {
@@ -72,7 +71,7 @@ export default class extends Component {
       <div className='item'>
         <div className={`def def-${this.props.no}`}>
           {!this.props.noNum && `${this.props.no + 1}. `}
-          {this.props.text}
+          {this.props.text} <span className="created-at">{moment(this.props.created_at).fromNow()}</span>
         </div>
         <div className='vote-wrapper d-flex flex-row align-items-stretch'>
           <a
@@ -113,20 +112,24 @@ export default class extends Component {
             background-color: #e74c3c;
           }
           .def {
-            font-size: 15px;
-          }
-          .def {
             margin-bottom: 5px;
-            font-size: 15px;
+            font-size: 18px;
+          }
+          .def .created-at {
+            display:block;
+            font-size: 10px;
+            color: gray;
+            margin: 0 0 0 8px;
           }
           .def-0 {
             font-size: 28px !important;
-            color: #e74c3c;
+            font-weight: bold;
+            // color: #e74c3c;
           }
-          .def-1 {
-            font-size: 20px !important;
-            color: #e67e22;
-          }
+          // .def-1 {
+          //   font-size: 20px !important;
+          //   color: #e67e22;
+          // }
         `}</style>
       </div>
     )

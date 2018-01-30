@@ -35,6 +35,7 @@ export default class extends Component {
         downvotes={def.downvotes}
         upvotes={def.upvotes}
         text={def.text}
+        created_at={def.created_at}
         no={i}
       />
     })
