@@ -15,9 +15,9 @@ export default class extends Component {
   }
 
   renderTldr = () => {
-    return [
-      <TldrItem />,<TldrItem />,<TldrItem />,<TldrItem />
-    ]
+    return this.state.coin.submitted_definitions.map((d, i) => {
+      return <div key={d._id}>- {d.text}</div>
+    })
   }
 
   render () {
