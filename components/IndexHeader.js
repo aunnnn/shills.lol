@@ -4,9 +4,12 @@ export default () => (
   <div>
     <div className='text-center py-4'>
       <Link href='/'>
-        <h1>Explain that COIN like i'm 5 🧒</h1>
+        <h1>It takes too long to know the coin 😩</h1>
       </Link>
-      <p className='font-italic'>TLDR of THAT COIN you're seeking</p>
+      <p>
+        <span>Can we TL;DR it?</span>
+        &nbsp;🤔
+      </p>
     </div>
     <style jsx>{`
       h1 {
