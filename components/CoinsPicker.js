@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
+import fuzzy from 'fuzzysearch'
 import API from '../utils/APIService'
 
 export default class extends Component {
@@ -49,7 +50,7 @@ export default class extends Component {
           const symbol = coin.symbol.toLowerCase()
           const inputCoin = this.state.inputCoin.toLowerCase()
 
-          return name.indexOf(inputCoin) >= 0 || symbol.indexOf(inputCoin) >= 0
+          return fuzzy(inputCoin, `${name} ${symbol}`)
         })
         .map(coin => (
           <li
