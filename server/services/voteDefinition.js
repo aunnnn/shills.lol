@@ -26,7 +26,7 @@ const voteDefinition = async (req, res) => {
 
   const result = await Definition.update({ _id: def_id }, updateCommand)
   send(res, 200, {
-    definition: result
+    result
   })
 }
 
