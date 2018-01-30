@@ -5,23 +5,26 @@ export default class extends Component {
     upvotes: 0,
     downvotes: 0,
     localScore: 0,
+    hitMaxTimes: 0,
     maxCap: 20,
   }
 
   vote = (vote) => {
     const { localScore, maxCap } = this.state
 
-    if (vote === 'up') {
-      if (localScore+1 > maxCap) {
+    if (this.state.upvotes + this.state.downvotes >= 20) {
+      this.setState(prev => ({ hitMaxTimes: prev.hitMaxTimes }))
+      if (this.state.hitMaxTimes <= 3) {
+        alert('Vote up to 20 votes.')
+      } else {
         alert('Come on.. really?')
-        return
       }
+      return
+    }
+
+    if (vote === 'up') {
       this.setState(prev => ({ upvotes: prev.upvotes + 1, localScore: prev.localScore + 1 }))
     } else {
-      if (localScore-1 < -maxCap) {
-        alert('Come on.. really?')
-        return
-      }
       this.setState(prev => ({ downvotes: prev.downvotes + 1, localScore: prev.localScore - 1 }))
     }
   }
@@ -36,9 +39,9 @@ export default class extends Component {
     const downOpacity = localScore < 0 ? (-localScore)/maxCap : 0
 
     return (
-      <li className='list-group-item d-flex justify-content-between align-items-stretch'>
-        <div className='text'>
-          sdfjsdfkjsdkfskdfj
+      <div className='item'>
+        <div className={`def def-${this.props.no}`}>
+          {this.props.no + 1}. {this.props.text}
         </div>
         <div className='vote-wrapper d-flex flex-row align-items-stretch'>
           <a
@@ -53,20 +56,16 @@ export default class extends Component {
           >👎 {this.state.downvotes !== 0 && '-'}{this.kFormatter(this.state.downvotes)}</a>
         </div>
         <style jsx>{`
-          .list-group-item {
-            padding: 0;
-          }
-          .text {
-            padding: 15px;
+          .item {
+            margin-bottom: 15px;
           }
           .vote-wrapper {
-            width: 25%;
-            maxWidth: 150px;
+            width: 100%;
+            max-width: 200px;
           }
           .vote {
             width: 50%;
             height: 100%;
-            border-left: 1px solid #ddd;
             cursor: pointer;
             flex: 1;
             display: flex;
@@ -82,8 +81,23 @@ export default class extends Component {
           .vote.down:hover {
             background-color: #e74c3c;
           }
+          .def {
+            font-size: 15px;
+          }
+          .def {
+            margin-bottom: 5px;
+            font-size: 15px;
+          }
+          .def-0 {
+            font-size: 28px !important;
+            color: #e74c3c;
+          }
+          .def-1 {
+            font-size: 20px !important;
+            color: #e67e22;
+          }
         `}</style>
-      </li>
+      </div>
     )
   }
 }
