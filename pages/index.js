@@ -77,7 +77,7 @@ class Index extends Component {
               <span>|</span>
             </div>
             <div className='col-4 col-md-6 d-flex justify-content-between'>
-              Top 5 TL;DRs
+              Top TL;DRs
             </div>
           </div>
           {this.renderIntroLists()}
