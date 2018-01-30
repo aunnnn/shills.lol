@@ -27,6 +27,22 @@ export default class extends Component {
   }
 
   renderTldr = () => {
+    if (!this.state.coin.submitted_definitions.length) {
+      return (
+        <div>
+          <div className="no-tldr">There's no tldr added yet. You can be the first!</div>
+          <style jsx>{`
+            .no-tldr {
+              color: gray;
+              font-size: 20px;
+              font-style: italic;
+              font-weight: 300;
+              margin-top: 40px;
+            }
+          `}</style>
+        </div>
+      )
+    }
     return this.state.coin.submitted_definitions.map((def, i) => {
       return <TldrItem
         key={def._id}
@@ -70,7 +86,7 @@ export default class extends Component {
                 <p>{this.state.coin.price_btc} BTC</p>
               </div>
               <div className='col-md-8 pt-2'>
-                <TldrInput id={this.state.coin._id} />
+                <TldrInput id={this.state.coin._id} coin_symbol={this.state.coin.symbol} />
                 {this.renderTldr()}
               </div>
             </div>
