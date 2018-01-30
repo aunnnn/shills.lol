@@ -27,11 +27,14 @@ class Index extends Component {
           </div>
           <div className='col-md-6'>
             {list.submitted_definitions.map((def, i) => (
-              <div className={`row def def-${i}`}>
-                <div className='col-12'>
-                  {i + 1}. {def.text}
-                </div>
-              </div>
+              <TldrItem
+                key={def._id}
+                coin_id={def.list_id}
+                downvotes={def.downvotes}
+                upvotes={def.upvotes}
+                text={def.text}
+                no={i}
+              />
             ))}
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               <a className='see-all'>See all {list.symbol}'s TL;DRs..</a>
@@ -46,12 +49,12 @@ class Index extends Component {
               font-size: 15px;
             }
             .def-0 {
-              font-size: 26px !important;
-              color: #c0392b;
+              font-size: 28px !important;
+              color: #e74c3c;
             }
             .def-1 {
               font-size: 20px !important;
-              color: #8e44ad;
+              color: #e67e22;
             }
             .see-all {
               font-size: 15px;
