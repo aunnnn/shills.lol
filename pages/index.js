@@ -13,15 +13,15 @@ class Index extends Component {
   renderIntroLists () {
     return this.props.introLists
       .filter(list => !!list.submitted_definitions.length)
-      .map(list => (
-        <div className='row coin mb-4'>
+      .map((list, ind) => (
+        <div key={`intro-${ind}`} className='row coin mb-4'>
           <div className='col-6 col-md-2 d-flex justify-content-between'>
             <strong>{list.name}</strong>
             {/* <span>|</span> */}
           </div>
           <div className='col-6 col-md-2 d-flex justify-content-between'>
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
-              {list.symbol}
+              <a>{list.symbol}</a>
             </Link>
             {/* <span>|</span> */}
           </div>

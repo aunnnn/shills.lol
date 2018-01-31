@@ -15,8 +15,8 @@ export default class extends Component {
       maxCap: 20,
     }
     // Decrease amount of API calls by aggregating amount and call once.
-    this.callUpvoteAPI = debounce(this._callVoteAPI('up'), 1000)
-    this.callDownvoteAPI = debounce(this._callVoteAPI('down'), 1000)
+    this.callUpvoteAPI = debounce(this._callVoteAPI('up'), 1200)
+    this.callDownvoteAPI = debounce(this._callVoteAPI('down'), 1200)
   }
 
   numberOfUpvoteActionsLeftToServer = 0

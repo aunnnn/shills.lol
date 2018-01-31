@@ -17,7 +17,6 @@ const getIntroLists = () => {
 }
 
 const addNewDefinition = (list_id, text) => {
-  console.log(list_id, text)
   return axios.post(urlWithPath(`/definitions`), {
     list_id: list_id,
     text: text,
