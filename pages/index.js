@@ -28,6 +28,7 @@ class Index extends Component {
           <div className='col-md-6'>
             <TldrItem
               key={list.submitted_definitions[0]._id}
+              def_id={list.submitted_definitions[0]._id}
               coin_id={list.submitted_definitions[0].list_id}
               downvotes={list.submitted_definitions[0].downvotes}
               upvotes={list.submitted_definitions[0].upvotes}
