@@ -27,6 +27,8 @@ const DefinitionSchema = Schema({
     min: 0,
     default: 0
   }
+}, {
+  timestamps: { createdAt: 'created_at' }
 })
 
 const initCollection = () => {

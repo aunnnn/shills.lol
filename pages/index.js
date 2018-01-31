@@ -17,13 +17,13 @@ class Index extends Component {
         <div className='row coin mb-4'>
           <div className='col-6 col-md-2 d-flex justify-content-between'>
             <strong>{list.name}</strong>
-            <span>|</span>
+            {/* <span>|</span> */}
           </div>
           <div className='col-6 col-md-2 d-flex justify-content-between'>
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               {list.symbol}
             </Link>
-            <span>|</span>
+            {/* <span>|</span> */}
           </div>
           <div className='col-md-6'>
             <TldrItem
@@ -32,11 +32,12 @@ class Index extends Component {
               downvotes={list.submitted_definitions[0].downvotes}
               upvotes={list.submitted_definitions[0].upvotes}
               text={list.submitted_definitions[0].text}
+              created_at={list.submitted_definitions[0].created_at}
               no={0}
               noNum
             />
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
-              <a className='see-all'>See all {list.symbol}'s TL;DRs..</a>
+              <a className='see-all'>See all...</a>
             </Link>
           </div>
           <style jsx>{`
@@ -70,14 +71,14 @@ class Index extends Component {
           <div className='row header pb-2 mb-2'>
             <div className='col-4 col-md-2 d-flex justify-content-between'>
               Name
-              <span>|</span>
+              {/* <span>|</span> */}
             </div>
             <div className='col-4 col-md-2 d-flex justify-content-between'>
               Symbol
-              <span>|</span>
+              {/* <span>|</span> */}
             </div>
             <div className='col-4 col-md-6 d-flex justify-content-between'>
-              Top TL;DRs
+              TL;DR
             </div>
           </div>
           {this.renderIntroLists()}

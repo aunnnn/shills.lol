@@ -2,7 +2,7 @@
   "name": "WhatsTheCoin",
   "version": "1.0.0",
   "description": "tldr cryptos",
-  "main": ".micro/index.js",
+  "main": "index.js",
   "repository": "https://github.com/aunnnn/WhatsTheCoin.git",
   "author": "aunnnn, jeojoe",
   "license": "MIT",
@@ -11,9 +11,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start -p 3000",
-    "dev-server": "micro-dev -p 64000",
+    "dev-server": "micro-dev index.js -p 3003",
     "build-server": "async-to-gen .  --ignore '/(node_modules|\\.micro|utils|pages|components|\\.next)/.*' --out-dir .micro",
-    "start-server": "micro -p 3001"
+    "start-server": "micro .micro/index.js -p 3001"
   },
   "dependencies": {
     "async-to-gen": "^1.3.3",
