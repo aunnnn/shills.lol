@@ -61,7 +61,6 @@ class TldrInput extends Component {
 
   render () {
     const { text, isTextOverflow, isTextUnderflow } = this.state
-    console.log(text, isTextUnderflow)
     return (
       <form className='mb-3'>
         <div className='form-row'>
