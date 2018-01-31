@@ -36,7 +36,8 @@ export default class extends Component {
     const { localScore, maxCap } = this.state
 
     if (this.state.userUpvotes + this.state.userDownvotes >= 20) {
-      this.setState(prev => ({ hitMaxTimes: prev.hitMaxTimes }))
+      this.setState(prev => ({ hitMaxTimes: prev.hitMaxTimes + 1 }))
+
       if (this.state.hitMaxTimes <= 3) {
         alert('Vote up to 20 votes.')
       } else {
