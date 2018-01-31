@@ -4,7 +4,7 @@ import axios from 'axios'
 import fuzzy from '../utils/fuzzy'
 import API from '../utils/APIService'
 
-export default class extends Component {
+export default class CoinsPicker extends Component {
   state = {
     coins: null,
     inputCoin: '',
@@ -56,7 +56,7 @@ export default class extends Component {
           <li
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
             onClick={() => this.selectCoin(coin.symbol)}
-            key={coin.cmc_id}
+            key={coin.id}
             style={{ cursor: 'pointer' }}
           >
             {coin.name}
