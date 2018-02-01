@@ -6,6 +6,12 @@ import { initStore, getIntroLists } from '../store'
 import { Layout, TldrItem } from '../components'
 
 class Index extends Component {
+
+  static async getInitialProps ({ store, query }) {
+    await store.dispatch(getIntroLists())
+    return {}
+  }
+
   componentDidMount () {
     this.props.getIntroLists()
   }
