@@ -11,8 +11,8 @@ const getIntroLists = async (req, res) => {
     path: 'submitted_definitions', 
     model: 'Definition',
     options: {
-      limit: 5,
-      sort: { upvotes: -1 }      
+      limit: 1,
+      sort: { upvotes: -1 }
     }
   })
   .exec()
