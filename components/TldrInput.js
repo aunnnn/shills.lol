@@ -29,7 +29,7 @@ class TldrInput extends Component {
       })
       return
     }
-    this.setState({ 
+    this.setState({
       text: e.target.value,
       isTextOverflow: false,
       isTextUnderflow: false,
@@ -43,7 +43,7 @@ class TldrInput extends Component {
   submit = (e) => {
     e.preventDefault()
     if (this.state.isTextUnderflow) {
-      alert("Don't you know how to spell? At least 10 chars man...")
+      alert("Don't you think that's too short?")
       return
     }
     if (this.state.isTextOverflow) return
@@ -52,7 +52,7 @@ class TldrInput extends Component {
     this.props.addNewDefinitionLoading(this.state.text)
     this.props.addNewDefinition(this.props.id, this.state.text)
 
-    // How to keep text around with Redux, 
+    // How to keep text around with Redux,
     // do we only have to bind text to global state?
     this.setState({
       text: '',
@@ -67,7 +67,7 @@ class TldrInput extends Component {
           <div className='col'>
             <input
               type="text"
-              className="form-control form-control-lg" placeholder={`Do you have any tldr for ${this.props.coin_symbol}?`}
+              className="form-control form-control-lg" placeholder={`Give a shill to ${this.props.coin_symbol}?`}
               value={this.props.text ? this.props.text : this.state.text}
               onChange={this.changeText}
               onKeyPress={this.onKeyPress}
