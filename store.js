@@ -6,13 +6,21 @@ import APIService from './utils/APIService'
 
 const initialState = {
   allLists: [],
-  introLists: []
+  introLists: [],
+  currentList: null,
+  loadingCurrentList: false,
+  submittingAddDefinition: false,
+  currentInputText: null,
 }
 
 // types
 export const actionTypes = {
   GET_ALL_LISTS: 'GET_ALL_LISTS',
-  GET_INTRO_LISTS: 'GET_INTRO_LISTS'
+  GET_INTRO_LISTS: 'GET_INTRO_LISTS',
+  GET_LIST: 'GET_LIST',
+  GET_LIST_LOADING: 'GET_LIST_LOADING',
+  ADD_DEFINITION_DONE: 'ADD_DEFINITION_DONE',
+  ADD_DEFINITION_LOADING: 'ADD_DEFINITION_LOADING',
 }
 
 // reducers
@@ -22,6 +30,15 @@ export const reducer = (state = initialState, action) => {
       return { ...state, allLists: action.allLists }
     case actionTypes.GET_INTRO_LISTS:
       return { ...state, introLists: action.introLists }
+    case actionTypes.GET_LIST:
+      return { ...state, currentList: action.currentList, loadingCurrentList: false, }
+    case actionTypes.GET_LIST_LOADING:
+      return { ...state, currentList: null, loadingCurrentList: true, }
+
+    case actionTypes.ADD_DEFINITION_LOADING:
+      return { ...state, submittingAddDefinition: true, currentInputText: action.currentList, }
+    case actionTypes.ADD_DEFINITION_DONE:
+      return { ...state, submittingAddDefinition: false, currentInputText: null, }
     default:
       return state
   }
@@ -29,7 +46,7 @@ export const reducer = (state = initialState, action) => {
 
 // actions
 export const getAllLists = () => dispatch => {
-  APIService.getAllLists()
+  return APIService.getAllLists()
     .then(res => {
       console.log(res.data)
       dispatch({
@@ -40,9 +57,8 @@ export const getAllLists = () => dispatch => {
 }
 
 export const getIntroLists = () => dispatch => {
-  APIService.getIntroLists()
+  return APIService.getIntroLists()
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: actionTypes.GET_INTRO_LISTS,
         introLists: res.data.intro_lists
@@ -50,10 +66,38 @@ export const getIntroLists = () => dispatch => {
     })
 }
 
+export const getList = (coin_symbol) => dispatch => {
+  // dispatch({ type: actionTypes.GET_LIST_LOADING })
+  return APIService.getList(coin_symbol)
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_LIST,
+        currentList: res.data.list,
+      })
+    })
+}
+
+export const addNewDefinitionLoading = (text) => (dispatch) => {
+  dispatch({
+    type: actionTypes.ADD_DEFINITION_LOADING,
+    currentInputText: text,
+  })
+}
+
 export const addNewDefinition = (listId, text) => dispatch => {
-  APIService.addNewDefinition(listId, text)
+  return APIService.addNewDefinition(listId, text)
     .then(res => {
       console.log(res)
+      dispatch({
+        type: actionTypes.ADD_DEFINITION_DONE,
+      })
+      return APIService.getList(res.data.symbol)
+    })
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_LIST,
+        currentList: res.data.list,
+      })
     })
 }
 

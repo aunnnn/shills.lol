@@ -21,7 +21,8 @@ const addDefinition = async (req, res) => {
   await list.save()
 
   send(res, 200, {
-    definition: savedDefinition
+    definition: savedDefinition,
+    symbol: list.symbol,
   })
 }
 

@@ -6,6 +6,12 @@ import { initStore, getIntroLists } from '../store'
 import { Layout, TldrItem } from '../components'
 
 class Index extends Component {
+
+  static async getInitialProps ({ store, query }) {
+    await store.dispatch(getIntroLists())
+    return {}
+  }
+
   componentDidMount () {
     this.props.getIntroLists()
   }
@@ -13,8 +19,8 @@ class Index extends Component {
   renderIntroLists () {
     return this.props.introLists
       .filter(list => !!list.submitted_definitions.length)
-      .map(list => (
-        <div className='row coin mb-4' key={list._id}>
+      .map((list, ind) => (
+        <div key={`intro-${ind}`} className='row coin mb-4'>
           <div className='col-6 col-md-2 d-flex justify-content-between'>
             <strong>{list.name}</strong>
             {/* <span>|</span> */}

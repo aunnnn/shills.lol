@@ -9,6 +9,11 @@ const voteDefinition = async (req, res) => {
   const vote_amount = body.vote_amount || 1
 
   var updateCommand;
+  
+  if (vote_amount > 20) {
+    throw new Error("Don't you think that's too much votes?")
+  }
+
   if (vote_type === 'up') {
     updateCommand = {
       $inc: {
