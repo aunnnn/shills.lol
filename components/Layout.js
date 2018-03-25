@@ -25,6 +25,11 @@ export default ({ children }) => (
       </div>
 
       {children}
+      <style jsx>{`
+        * {
+          font-family: Menlo, Monaco, monospace;
+        }
+      `}</style>
     </div>
   </div>
 )

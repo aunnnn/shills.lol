@@ -1,5 +1,5 @@
-# WhatsTheCoin
+# Shills.lol
 
-The only tl;dr you need.
+The only shills you need.
 
-[Check it out.](https://whatsthatcoin.aunnnn.com)
+[shills.lol](https://shills.lol)

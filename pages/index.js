@@ -85,7 +85,7 @@ class Index extends Component {
               {/* <span>|</span> */}
             </div>
             <div className='col-4 col-md-6 d-flex justify-content-between'>
-              TL;DR
+              Shills
             </div>
           </div>
           {this.renderIntroLists()}
