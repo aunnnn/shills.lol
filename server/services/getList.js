@@ -11,9 +11,20 @@ const getList = async (req, res) => {
       sort: { upvotes: -1 },
       limit: 25,
     }
-  })
+  }).exec()
+
+  // console.log(typeof data)
+  // data['cmc_url'] = `https://coinmarketcap.com/currencies/${data.cmc_id}/`
+  // data['cmc_icon'] = `https://s2.coinmarketcap.com/static/img/coins/64x64/${data.cmc_asset_id}.png`
+  
+  console.log(data)
   send(res, 200, {
-    list: data
+    // list: data,
+    list: {
+      cmc_url: `https://coinmarketcap.com/currencies/${data.cmc_id}/`,
+      cmc_icon: `https://s2.coinmarketcap.com/static/img/coins/64x64/${data.cmc_asset_id}.png`,
+      ...data._doc
+    }
   })
 }
 
