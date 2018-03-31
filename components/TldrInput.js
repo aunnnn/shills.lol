@@ -6,7 +6,7 @@ import { addNewDefinition, addNewDefinitionLoading } from '../store'
 import APIService from '../utils/APIService'
 
 const MAXIMUM_CHARACTERS_ALLOWED = 77
-const MINIMUM_CHARACTERS_ALLOWED = 8
+const MINIMUM_CHARACTERS_ALLOWED = 3
 
 class TldrInput extends Component {
   state = {

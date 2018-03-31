@@ -6,7 +6,7 @@ const getIntroLists = async (req, res) => {
     .aggregate()
     .match({
       rank: {
-        $lt: 100
+        $lt: 200
       }
     })
     .project({

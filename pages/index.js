@@ -23,7 +23,6 @@ class Index extends Component {
         if (list.submitted_definitions && list.submitted_definitions.length) {
           const topShill = list.submitted_definitions[0]
           const latestShill = list.submitted_definitions[list.submitted_definitions.length - 1]
-          // console.log(topShill)
           return (
             <li key={`intro-${ind}`} className="mb-1">
               <Link href={`/coin?symbol=${list.symbol}`} prefetch>
@@ -37,7 +36,7 @@ class Index extends Component {
                       {list.name}{' '}
                       <span className="symbol">{list.symbol}</span>: "{topShill.text}"
                     </h2>
-                    <p className="label">{list.definitions_count} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
+                    <p className="label">{list.definitions_count} shills | latest shill {moment(list.latest_definition_added).fromNow()}</p>
                   </div>
                 </a>
               </Link>

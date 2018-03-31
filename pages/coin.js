@@ -52,7 +52,7 @@ class CoinPage extends Component {
         <div>
           {this.renderTickerWidget()}
         </div>
-        <a href={this.props.coin.cmc_url}>coinmarketcap</a>
+        <p>View at <a href={this.props.coin.cmc_url}>coinmarketcap</a></p>
         <style jsx>{`
           .bg {
             background-color: #fff;
