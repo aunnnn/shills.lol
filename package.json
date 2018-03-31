@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=debug next",
+    "dev": "next",
     "build": "next build",
     "start": "next start -p 3000",
     "dev-server": "micro-dev index.js -p 3003",
