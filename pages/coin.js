@@ -49,6 +49,10 @@ class CoinPage extends Component {
           <h1 className='coin-name'>{this.props.coin.name}</h1>
           <h2 className='coin-symbol'>{this.props.coin.symbol}</h2>
         </div>
+        <div>
+          {this.renderTickerWidget()}
+        </div>
+        <a href={this.props.coin.cmc_url}>coinmarketcap</a>
       </div>
     )
   }
@@ -95,7 +99,6 @@ class CoinPage extends Component {
               {/* detail */}
               <div className='col-md-4'>
                 {this.renderStatus()}
-                {this.renderTickerWidget()}
               </div>
               <div className='col-md-8 pt-2'>
                 <TldrInput id={this.props.coin._id} coin_symbol={this.props.coin.symbol} />
