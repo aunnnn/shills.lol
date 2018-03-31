@@ -101,5 +101,10 @@ export const addNewDefinition = (listId, text) => dispatch => {
 
 // init store
 export const initStore = (state = initialState) => {
-  return createStore(reducer, state, composeWithDevTools(applyMiddleware(thunk, logger)))
+  const middlewares = [thunk]
+  if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger)
+  }
+
+  return createStore(reducer, state, composeWithDevTools(applyMiddleware(...middlewares)))
 }
