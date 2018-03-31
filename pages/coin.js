@@ -13,7 +13,6 @@ class CoinPage extends Component {
   }
 
   componentDidMount() {
-    // const widgetURL = `https://widgets.coinmarketcap.com/v2/ticker/2129/?ref=widget&convert=USD`
     const script = document.createElement("script");
 
     script.src = "https://files.coinmarketcap.com/static/widget/currency.js";
@@ -22,6 +21,23 @@ class CoinPage extends Component {
     document.body.appendChild(script);
   }
   
+  renderTickerWidget = () => {
+    return (
+      <div 
+        className="coinmarketcap-currency-widget" 
+        data-currencyid={this.props.coin.cmc_asset_id}
+        data-base="USD" 
+        data-secondary="" 
+        data-ticker="true" 
+        data-rank="true" 
+        data-marketcap="true" 
+        data-volume="true" 
+        data-stats="USD" 
+        data-statsticker="true">
+      </div>
+    )
+  }
+
   renderStatus = () => {
     return (
       <div>
@@ -87,6 +103,7 @@ class CoinPage extends Component {
               {/* detail */}
               <div className='col-md-4'>
                 {this.renderStatus()}
+                {this.renderTickerWidget()}
               </div>
               <div className='col-md-8 pt-2'>
                 <TldrInput id={this.props.coin._id} coin_symbol={this.props.coin.symbol} />
