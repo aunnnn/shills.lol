@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Link from 'next/link';
 import APIService from '../utils/APIService';
 import { debounce } from 'lodash';
 import moment from 'moment';
@@ -63,72 +64,60 @@ export default class extends Component {
 
   render () {
     const { userUpvotes, userDownvotes, localScore, maxCap } = this.state
-    const upOpacity = localScore > 0 ? localScore/maxCap : 0
-    const downOpacity = localScore < 0 ? (-localScore)/maxCap : 0
+
+    const sumVotes = this.props.upvotes - this.props.downvotes
+    const sumUserVotes = this.state.userUpvotes - this.state.userDownvotes
+
+    const total = this.props.upvotes + this.props.downvotes + this.state.userDownvotes + this.state.userUpvotes
+    const totalUpvotes = this.props.upvotes + this.state.userUpvotes
+    const totalDownvotes = this.props.downvotes + this.state.userDownvotes
+
+    let upvotesPercent = (totalUpvotes / total) * 100
+    let downvotesPercent = (totalDownvotes / total) * 100
+
+    if (!upvotesPercent && !downvotesPercent) {
+      upvotesPercent = 50
+      downvotesPercent = 50
+    }
 
     return (
-      <div className='item'>
-        <div className={`def def-${this.props.no}`}>
-          {!this.props.noNum && `${this.props.no + 1}. `}
-          "{this.props.text}" <span className="created-at">{moment(this.props.created_at).fromNow()}</span>
+      <div className='mb-3 pl-2'>
+        <div className="d-flex flex-row align-items-center mb-2">
+          <a onClick={() => this.vote('up')}>
+            👍
+          </a>
+          <div className="progress mr-1">
+            <div className="progress-bar bg-success" role="progressbar" style={{ width: `${upvotesPercent}%` }}>
+              {this.kFormatter(totalUpvotes)}
+            </div>
+            <div className="progress-bar bg-danger" role="progressbar" style={{ width: `${downvotesPercent}%` }}>
+              {this.kFormatter(totalDownvotes)}
+            </div>
+          </div>
+          <a onClick={() => this.vote('down')}>
+            👎
+          </a>
         </div>
-        <div className='vote-wrapper d-flex flex-row align-items-stretch'>
-          <a
-            className='vote up'
-            onClick={() => this.vote('up')}
-            style={{ backgroundColor: `rgba(39, 174, 96, ${upOpacity})`}}
-          >👍 {this.state.userUpvotes !== 0 && '+'}{this.kFormatter(this.state.userUpvotes + this.props.upvotes)}</a>
-          <a
-            className='vote down'
-            onClick={() => this.vote('down')}
-            style={{ backgroundColor: `rgba(231, 76, 60, ${downOpacity})`}}
-          >👎 {this.state.userDownvotes !== 0 && '-'}{this.kFormatter(this.state.userDownvotes + this.props.downvotes)}</a>
-        </div>
+        <h3>
+          "{this.props.text}"
+        </h3>
+        <label className="created-at">{moment(this.props.created_at).fromNow()}</label>
         <style jsx>{`
-          .item {
-            margin-bottom: 15px;
-          }
-          .vote-wrapper {
-            width: 100%;
-            max-width: 200px;
-          }
-          .vote {
-            width: 50%;
-            height: 100%;
+          a {
             cursor: pointer;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 15px;
-            user-select: none;
-            transition: background-color 0.2s;
           }
-          .vote.up:hover {
-            background-color: #2ecc71;
+          h3 {
+            margin: 0;
           }
-          .vote.down:hover {
-            background-color: #e74c3c;
+          .progress {
+            width: 200px;
           }
-          .def {
-            margin-bottom: 5px;
-            font-size: 18px;
+          .total {
+            margin-right: 5px;
           }
-          .def .created-at {
-            display:block;
-            font-size: 10px;
-            color: gray;
-            margin: 0 0 0 8px;
+          .created-at {
+            font-size: 12px;
           }
-          .def-0 {
-            font-size: 28px !important;
-            font-weight: bold;
-            // color: #e74c3c;
-          }
-          // .def-1 {
-          //   font-size: 20px !important;
-          //   color: #e67e22;
-          // }
         `}</style>
       </div>
     )
