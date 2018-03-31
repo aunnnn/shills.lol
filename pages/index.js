@@ -2,6 +2,7 @@ import { Component } from 'react'
 import Link from 'next/link'
 import withRedux from 'next-redux-wrapper'
 import { bindActionCreators } from 'redux'
+import moment from 'moment'
 import { initStore, getIntroLists } from '../store'
 import { Layout, TldrItem } from '../components'
 
@@ -18,78 +19,76 @@ class Index extends Component {
 
   renderIntroLists () {
     return this.props.introLists
-      .filter(list => !!list.submitted_definitions.length)
-      .map((list, ind) => (
-        <div key={`intro-${ind}`} className='row coin mb-4'>
-          <div className='col-6 col-md-2 d-flex justify-content-between'>
-            <strong>{list.name}</strong>
-            {/* <span>|</span> */}
-          </div>
-          <div className='col-6 col-md-2 d-flex justify-content-between'>
+      .map((list, ind) => {
+        if (list.submitted_definitions.length) {
+          const topShill = list.submitted_definitions[0]
+          const latestShill = list.submitted_definitions[list.submitted_definitions.length - 1]
+          return (
+            <li key={`intro-${ind}`}>
+              <Link href={`/coin?symbol=${list.symbol}`} prefetch>
+                <a className="link">
+                  <h2 className="text">{list.name} ({list.symbol}): {topShill.text}</h2>
+                  <p className="label">{list.submitted_definitions.length} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
+                </a>
+              </Link>
+              <style jsx>{`
+                .link {
+                  text-decoration: none;
+                }
+                .text {
+                  color: #000;
+                  margin: 0 !important;
+                  padding: 0;
+                  font-size: 15px;
+                }
+                .label {
+                  color: #999;
+                  font-size: 12px;
+                  margin-bottom: 5px;
+                }
+              `}</style>
+            </li>
+          )
+        }
+
+        return (
+          <li key={`intro-${ind}`}>
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
-              <a>{list.symbol}</a>
+              <a className="link">
+                <h2 className="text">{list.name} ({list.symbol}): <span className="insert-shill">-</span></h2>
+                <p className="label">No shills yet, insert shill</p>
+              </a>
             </Link>
-            {/* <span>|</span> */}
-          </div>
-          <div className='col-md-6'>
-            <TldrItem
-              key={list.submitted_definitions[0]._id}
-              def_id={list.submitted_definitions[0]._id}
-              coin_id={list.submitted_definitions[0].list_id}
-              downvotes={list.submitted_definitions[0].downvotes}
-              upvotes={list.submitted_definitions[0].upvotes}
-              text={list.submitted_definitions[0].text}
-              created_at={list.submitted_definitions[0].created_at}
-              no={0}
-              noNum
-            />
-            <Link href={`/coin?symbol=${list.symbol}`} prefetch>
-              <a className='see-all'>See all...</a>
-            </Link>
-          </div>
-          <style jsx>{`
-            .coin {
-              font-size: 18px;
-            }
-            .def {
-              margin-bottom: 5px;
-              font-size: 15px;
-            }
-            .def-0 {
-              font-size: 28px !important;
-              color: #e74c3c;
-            }
-            .def-1 {
-              font-size: 20px !important;
-              color: #e67e22;
-            }
-            .see-all {
-              font-size: 15px;
-            }
-          `}</style>
-        </div>
-      ))
+            <style jsx>{`
+              .link {
+                text-decoration: none;
+              }
+              .text {
+                color: #000;
+                margin: 0 !important;
+                padding: 0;
+                font-size: 15px;
+              }
+              .label {
+                color: #999;
+                font-size: 12px;
+                margin-bottom: 5px;
+              }
+              .insert-shill {
+                color: #999;
+              }
+            `}</style>
+          </li>
+        )
+      })
   }
 
   render () {
     return (
       <Layout>
-        <div className='container-fluid'>
-          <div className='row header pb-2 mb-2'>
-            <div className='col-4 col-md-2 d-flex justify-content-between'>
-              Name
-              {/* <span>|</span> */}
-            </div>
-            <div className='col-4 col-md-2 d-flex justify-content-between'>
-              Symbol
-              {/* <span>|</span> */}
-            </div>
-            <div className='col-4 col-md-6 d-flex justify-content-between'>
-              Shills
-            </div>
-          </div>
+        <ol>
           {this.renderIntroLists()}
-        </div>
+        </ol>
         <style jsx>{`
           .header {
             font-weight: bold;

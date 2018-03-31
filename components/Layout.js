@@ -11,14 +11,14 @@ export default ({ children }) => (
     </Head>
     <div className='py-3'>
       <div className='container'>
-        <div className='row'>
+        <div className='row mb-2'>
           <div className='col-12'>
             <IndexHeader />
           </div>
         </div>
-      </div>
 
-      {children}
+        {children}
+      </div>
     </div>
   </div>
 )
