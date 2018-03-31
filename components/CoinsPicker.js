@@ -79,14 +79,14 @@ export default class CoinsPicker extends Component {
     }
 
     return (
-      <div style={{ width: '100%' }}>
+      <div>
         <div className='input-group'>
           <div className='input-group-prepend'>
             <div className='input-group-text'>🔎</div>
           </div>
           <input
             type='text' className='form-control'
-             placeholder="What's the name of THAT COIN?"
+            placeholder="Search coin"
             value={this.state.inputCoin}
             onChange={this.changeText}
             onFocus={() => this.setState({ focused: true })}
@@ -96,7 +96,7 @@ export default class CoinsPicker extends Component {
         <ul className='list-group'>
           {this.renderCoins()}
         </ul>
-        
+
         <style jsx>{`
           .list-group {
             min-width: 250px;
