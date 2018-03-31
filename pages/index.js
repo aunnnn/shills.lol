@@ -21,6 +21,7 @@ class Index extends Component {
     return this.props.introLists
       .map((list, ind) => {
         if (list.submitted_definitions.length) {
+          console.log(list)
           const topShill = list.submitted_definitions[0]
           const latestShill = list.submitted_definitions[list.submitted_definitions.length - 1]
           return (
@@ -28,7 +29,7 @@ class Index extends Component {
               <Link href={`/coin?symbol=${list.symbol}`} prefetch>
                 <a className="link">
                   <h2 className="text">{list.name} ({list.symbol}): "{topShill.text}"</h2>
-                  <p className="label">{list.submitted_definitions.length} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
+                  <p className="label">{list.definitions_count} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
                 </a>
               </Link>
               <style jsx>{`
@@ -43,7 +44,7 @@ class Index extends Component {
                 }
                 .label {
                   color: #999;
-                  font-size: 12px;
+                  font-size: 10px;
                   margin-bottom: 5px;
                 }
               `}</style>
@@ -71,7 +72,7 @@ class Index extends Component {
               }
               .label {
                 color: #999;
-                font-size: 12px;
+                font-size: 10px;
                 margin-bottom: 5px;
               }
               .insert-shill {
@@ -92,11 +93,6 @@ class Index extends Component {
         <style jsx>{`
           .bg {
             background-color: #fff;
-          }
-          .header {
-            font-weight: bold;
-            border-bottom: 1px dashed #000;
-            font-size: 14px;
           }
         `}</style>
       </Layout>

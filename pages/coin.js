@@ -36,7 +36,7 @@ class CoinPage extends Component {
     if (!this.props.coin.submitted_definitions.length) {
       return (
         <div>
-          <div className="no-tldr">There's no tldr added yet. You can be the first!</div>
+          <div className="no-tldr">There's no shill added yet. You can be the first!</div>
           <style jsx>{`
             .no-tldr {
               color: gray;
@@ -67,7 +67,6 @@ class CoinPage extends Component {
     return (
       <Layout>
         <div className='container-fluid'>
-          <div className='row header mb-4' />
           {(!this.props.coin || this.props.fetchingCoin) ?
             <div>Fetching {this.props.url.query.symbol} data..</div>
             :
@@ -99,9 +98,6 @@ class CoinPage extends Component {
           }
         </div>
         <style jsx>{`
-          .header {
-            border-bottom: 1px dashed #000;
-          }
           .coin-name {
             margin-right: 15px;
           }

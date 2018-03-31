@@ -16,6 +16,7 @@ export default ({ children }) => (
             <IndexHeader />
           </div>
         </div>
+        <div className='dashed' />
 
         {children}
       </div>
@@ -23,6 +24,9 @@ export default ({ children }) => (
         body {
           background-color: #fafafa;
         }
+        .dashed {
+            border-bottom: 1px dashed #000;
+          }
       `}
       </style>
     </div>
