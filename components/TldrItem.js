@@ -87,10 +87,10 @@ export default class extends Component {
             👍
           </a>
           <div className="progress mr-1">
-            <div className="progress-bar bg-success" role="progressbar" style={{ width: `${upvotesPercent}%` }}>
+            <div className={`progress-bar bg-success progress-bar-striped ${this.props.first ? 'progress-bar-animated' : ''}`} role="progressbar" style={{ width: `${upvotesPercent}%` }}>
               {this.kFormatter(totalUpvotes)}
             </div>
-            <div className="progress-bar bg-danger" role="progressbar" style={{ width: `${downvotesPercent}%` }}>
+            <div className={`progress-bar bg-danger progress-bar-striped ${this.props.first ? 'progress-bar-animated' : ''}`}  role="progressbar" style={{ width: `${downvotesPercent}%` }}>
               {this.kFormatter(totalDownvotes)}
             </div>
           </div>
@@ -108,13 +108,14 @@ export default class extends Component {
           }
           h2 {
             margin: 0;
-            font-size: 15px
+            font-size: 18px
           }
           h2.first {
             font-size: 27px;
           }
           .progress {
             width: 200px;
+            height: 12px;
           }
           .total {
             margin-right: 5px;
