@@ -1,13 +1,6 @@
 import axios from 'axios'
 
-let BASE_URL = "https://api.shills.lol"
-if (process.env.NODE_ENV === "development") {
-  console.log("Debug mode detected. Use localhost:3003 for api endpoint.")
-  BASE_URL = "http://localhost:3003"
-} else {
-  console.log("Debug mode off. Use api.shills.lol for api endpoint.")
-  console.log(process.env.NODE_ENV)
-}
+const BASE_URL = "https://api.shills.lol"
 
 const urlWithPath = (path) => `${BASE_URL}${path}`
 
