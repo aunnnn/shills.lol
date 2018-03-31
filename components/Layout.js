@@ -11,6 +11,8 @@ const Layout = ({ children }) => (
       <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous' />
       <link rel="icon" type="image/png" href="/static/favicon-32x32.png" sizes="32x32" />
       <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
+      <meta property="og:url" content="https://shills.lol" />
+      <meta property="og:image" content="https://shills.lol/static/lol.png" />
     </Head>
     <div className='py-3'>
       <div className='container'>
