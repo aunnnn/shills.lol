@@ -60,6 +60,7 @@ export default class CoinsPicker extends Component {
 
           return fuzzy(inputCoin, `${name} ${symbol}`)
         })
+        .slice(0, 20)
         .map(coin => (
           <li
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
