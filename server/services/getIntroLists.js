@@ -4,7 +4,7 @@ const List = require('../models/List')
 const getIntroLists = async (req, res) => {
   const data = await List.find({ 
     rank: {
-      $lt: 20
+      $lt: 100
     }
   })
   .populate({ 
