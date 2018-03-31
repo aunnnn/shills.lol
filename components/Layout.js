@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { IndexHeader, CoinsPicker } from '../components'
+import withAnalytics from './hocs/withAnalytics';
 
-export default ({ children }) => (
+const Layout = ({ children }) => (
   <div>
     <Head>
       <title>Coin Shills LOL</title>
@@ -34,3 +35,5 @@ export default ({ children }) => (
     </div>
   </div>
 )
+
+export default withAnalytics(Layout)
