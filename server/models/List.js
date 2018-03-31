@@ -6,6 +6,7 @@ const ListSchema = Schema({
 
   // From CMC
   cmc_id: String,
+  cmc_asset_id: String,
   name: String,
   symbol: String,  
   rank: Number,
@@ -13,7 +14,8 @@ const ListSchema = Schema({
   submitted_definitions: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Definition'
+      ref: 'Definition',
+      default: [],
     }
   ],
 

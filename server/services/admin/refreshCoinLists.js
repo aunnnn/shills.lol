@@ -1,6 +1,7 @@
 const { send } = require('micro')
 const fetch = require('node-fetch')
 const List = require('../../models/List')
+const refreshAssetIds = require('./refreshCMCAssetIds')
 
 const refreshCoinLists = async (req, res) => {
   const response = await fetch('https://api.coinmarketcap.com/v1/ticker/?limit=0')
@@ -23,9 +24,13 @@ const refreshCoinLists = async (req, res) => {
 
   const afterLength = await List.count({})
 
+  // Also refresh asset ids
+  const assets_length = await refreshAssetIds()
+
   send(res, 200, {
     success: true,
     n_added: afterLength - beforeLength,
+    assets_length,
   })
 }
 

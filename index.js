@@ -15,6 +15,7 @@ const getLatestCoinStatus = require('./server/services/getLatestCoinStatus')
 
 // Admin Services
 const refreshCoinLists = require('./server/services/admin/refreshCoinLists')
+const refreshCMCAssetIds = require('./server/services/admin/refreshCMCAssetIds')
 
 connectDB()
 
@@ -36,7 +37,7 @@ const server = router(
   safe(post)('/vote', voteDefinition),
 
   // Admin
-  safe(get)('/_refreshCoinLists', refreshCoinLists)
+  safe(get)('/_refreshCoinLists', refreshCoinLists),
 )
 
 module.exports = cors(server)

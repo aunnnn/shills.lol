@@ -20,6 +20,14 @@ export default class CoinsPicker extends Component {
         coins: JSON.parse(coins),
         fetchingCoins: false
       })
+
+      // Still update and set the cache
+      API.getAllLists()
+        .then(res => {
+          const coins = res.data.all_lists
+          localStorage.setItem('coins', JSON.stringify(coins))
+          console.log('Coins list is updated.')
+        })
     } else {
       API.getAllLists()
         .then(res => {
@@ -52,11 +60,12 @@ export default class CoinsPicker extends Component {
 
           return fuzzy(inputCoin, `${name} ${symbol}`)
         })
+        .slice(0, 20)
         .map(coin => (
           <li
             className='list-group-item list-group-item-action d-flex justify-content-between align-items-center'
             onClick={() => this.selectCoin(coin.symbol)}
-            key={coin.id}
+            key={coin.cmc_id}
             style={{ cursor: 'pointer' }}
           >
             {coin.name}
