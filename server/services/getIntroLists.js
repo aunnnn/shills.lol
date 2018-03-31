@@ -22,6 +22,7 @@ const getIntroLists = async (req, res) => {
       definitions_count: 1,
       latest_definition_added: 1,
       cmc_id: 1,
+      submitted_definitions: 1,
     })
 
   const data = await List.populate(lists, {
