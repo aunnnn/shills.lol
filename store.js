@@ -48,7 +48,6 @@ export const reducer = (state = initialState, action) => {
 export const getAllLists = () => dispatch => {
   return APIService.getAllLists()
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: actionTypes.GET_ALL_LISTS,
         allLists: res.data.all_lists
@@ -87,7 +86,6 @@ export const addNewDefinitionLoading = (text) => (dispatch) => {
 export const addNewDefinition = (listId, text) => dispatch => {
   return APIService.addNewDefinition(listId, text)
     .then(res => {
-      console.log(res)
       dispatch({
         type: actionTypes.ADD_DEFINITION_DONE,
       })
