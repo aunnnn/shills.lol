@@ -56,6 +56,8 @@ class TldrInput extends Component {
     // do we only have to bind text to global state?
     this.setState({
       text: '',
+      isTextOverflow: false,
+      isTextUnderflow: true,
     })
   }
 

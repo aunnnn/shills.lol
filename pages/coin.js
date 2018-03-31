@@ -49,18 +49,6 @@ class CoinPage extends Component {
           <h1 className='coin-name'>{this.props.coin.name}</h1>
           <h2 className='coin-symbol'>{this.props.coin.symbol}</h2>
         </div>
-        <p>
-          {this.props.coin.price_usd} USD
-          {` `}
-          <span
-            style={{
-              color: this.props.coin.percent_change_24h >= 0 ? 'green' : 'red'
-            }}
-          >
-            ({this.props.coin.percent_change_24h}%)
-          </span>
-        </p>
-        <p>{this.props.coin.price_btc} BTC</p>
       </div>
     )
   }
