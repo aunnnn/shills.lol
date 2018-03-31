@@ -18,6 +18,7 @@ const getLatestCoinStatus = async (req, res) => {
     percent_change_24h: c.percent_change_24h,
     percent_change_7d: c.percent_change_7d,
     cmc_last_updated: c.last_updated,
+    cmc_url: `https://coinmarketcap.com/currencies/${c.id}/`,
   }
 
   send(res, 200, {
