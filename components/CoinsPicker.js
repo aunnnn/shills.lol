@@ -86,7 +86,7 @@ export default class CoinsPicker extends Component {
           </div>
           <input
             type='text' className='form-control'
-             placeholder="What's the name of THAT COIN?"
+             placeholder="Search"
             value={this.state.inputCoin}
             onChange={this.changeText}
             onFocus={() => this.setState({ focused: true })}
