@@ -18,6 +18,8 @@ const addDefinition = async (req, res) => {
   const savedDefinition = await definition.save()
   
   list.submitted_definitions.push(savedDefinition._id)
+  list.definitions_count = list.submitted_definitions.length
+  list.latest_definition_added = Date()
   await list.save()
 
   send(res, 200, {

@@ -21,7 +21,18 @@ const ListSchema = Schema({
       type: Schema.Types.ObjectId,
       ref: 'Tag',
     }
-  ]
+  ],
+
+  definitions_count: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  
+  latest_definition_added: {
+    type: Date,
+    required: false,
+  },
 })
 
 const initCollection = () => {
