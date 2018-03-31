@@ -12,25 +12,38 @@ class CoinPage extends Component {
     return {}
   }
 
-  fetchCoin = () => {
-    // console.log('fetccccc')
-    // this.setState({ fetchingCoin: true })
-    // this.props.getList(this.props.url.query.symbol)
-    // APIService.getList(this.props.url.query.symbol)
-    //   .then(res => {
-    //     this.setState({ coin: res.data.list, fetchingCoin: false })
-    //   })
+  componentDidMount() {
+    // const widgetURL = `https://widgets.coinmarketcap.com/v2/ticker/2129/?ref=widget&convert=USD`
+    const script = document.createElement("script");
+
+    script.src = "https://files.coinmarketcap.com/static/widget/currency.js";
+    script.async = true;
+
+    document.body.appendChild(script);
   }
-
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.url.query.symbol !== this.props.url.query.symbol) {
-  //     this.fetchCoin()
-  //   }
-  // }
-
-  // componentDidMount () {
-  //   this.fetchCoin()
-  // }
+  
+  renderStatus = () => {
+    return (
+      <div>
+        <div className='d-flex flex-row justify-content-start align-items-center'>
+          <h1 className='coin-name'>{this.props.coin.name}</h1>
+          <h2 className='coin-symbol'>{this.props.coin.symbol}</h2>
+        </div>
+        <p>
+          {this.props.coin.price_usd} USD
+          {` `}
+          <span
+            style={{
+              color: this.props.coin.percent_change_24h >= 0 ? 'green' : 'red'
+            }}
+          >
+            ({this.props.coin.percent_change_24h}%)
+          </span>
+        </p>
+        <p>{this.props.coin.price_btc} BTC</p>
+      </div>
+    )
+  }
 
   renderTldr = () => {
     if (!this.props.coin.submitted_definitions.length) {
@@ -73,22 +86,7 @@ class CoinPage extends Component {
             <div className='row'>
               {/* detail */}
               <div className='col-md-4'>
-                <div className='d-flex flex-row justify-content-start align-items-center'>
-                  <h1 className='coin-name'>{this.props.coin.name}</h1>
-                  <h2 className='coin-symbol'>{this.props.coin.symbol}</h2>
-                </div>
-                <p>
-                  {this.props.coin.price_usd} USD
-                  {` `}
-                  <span
-                    style={{
-                      color: this.props.coin.percent_change_24h >= 0 ? 'green' : 'red'
-                    }}
-                  >
-                    ({this.props.coin.percent_change_24h}%)
-                  </span>
-                </p>
-                <p>{this.props.coin.price_btc} BTC</p>
+                {this.renderStatus()}
               </div>
               <div className='col-md-8 pt-2'>
                 <TldrInput id={this.props.coin._id} coin_symbol={this.props.coin.symbol} />

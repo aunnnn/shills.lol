@@ -6,6 +6,7 @@ const ListSchema = Schema({
 
   // From CMC
   cmc_id: String,
+  cmc_asset_id: String,
   name: String,
   symbol: String,  
   rank: Number,
