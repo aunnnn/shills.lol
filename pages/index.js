@@ -20,17 +20,25 @@ class Index extends Component {
   renderIntroLists () {
     return this.props.introLists
       .map((list, ind) => {
-        if (list.submitted_definitions.length) {
-          console.log(list)
+        if (list.submitted_definitions && list.submitted_definitions.length) {
           const topShill = list.submitted_definitions[0]
           const latestShill = list.submitted_definitions[list.submitted_definitions.length - 1]
+          // console.log(topShill)
           return (
-            <li key={`intro-${ind}`}>
+            <li key={`intro-${ind}`} className="mb-1">
               <Link href={`/coin?symbol=${list.symbol}`} prefetch>
                 <a className="link">
-                  <h2 className="text">{list.name}{' '}
-                  <span className="symbol">{list.symbol}</span>: "{topShill.text}"</h2>
-                  <p className="label">{list.definitions_count} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
+                  <img
+                    src={list.cmc_icon} width="30" height="30"
+                    className="d-inline-block align-top mr-2"
+                  />
+                  <div className="d-inline-block align-top">
+                    <h2 className="text">
+                      {list.name}{' '}
+                      <span className="symbol">{list.symbol}</span>: "{topShill.text}"
+                    </h2>
+                    <p className="label">{list.definitions_count} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
+                  </div>
                 </a>
               </Link>
               <style jsx>{`
@@ -57,12 +65,20 @@ class Index extends Component {
         }
 
         return (
-          <li key={`intro-${ind}`}>
+          <li key={`intro-${ind}`} className="mb-1">
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               <a className="link">
-                <h2 className="text">{list.name}{' '}
-                <span className="symbol">{list.symbol}</span>: <span className="insert-shill">-</span></h2>
-                <p className="label">No shills yet, insert shill</p>
+                <img
+                  src={list.cmc_icon} width="30" height="30"
+                  className="d-inline-block align-top mr-2"
+                />
+                <div className="d-inline-block align-top">
+                  <h2 className="text">
+                    {list.name}{' '}
+                    <span className="symbol">{list.symbol}</span>: <span className="insert-shill">-</span>
+                  </h2>
+                  <p className="label">No shills yet, insert shill</p>
+                </div>
               </a>
             </Link>
             <style jsx>{`

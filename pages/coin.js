@@ -24,19 +24,19 @@ class CoinPage extends Component {
     document.body.appendChild(jquery);
     document.body.appendChild(script);
   }
-  
+
   renderTickerWidget = () => {
     return (
-      <div 
-        className="coinmarketcap-currency-widget" 
+      <div
+        className="coinmarketcap-currency-widget"
         data-currencyid={this.props.coin.cmc_asset_id}
-        data-base="USD" 
-        data-secondary="" 
-        data-ticker="true" 
-        data-rank="true" 
-        data-marketcap="true" 
-        data-volume="true" 
-        data-stats="USD" 
+        data-base="USD"
+        data-secondary=""
+        data-ticker="true"
+        data-rank="true"
+        data-marketcap="true"
+        data-volume="true"
+        data-stats="USD"
         data-statsticker="true">
       </div>
     )
@@ -53,6 +53,18 @@ class CoinPage extends Component {
           {this.renderTickerWidget()}
         </div>
         <a href={this.props.coin.cmc_url}>coinmarketcap</a>
+        <style jsx>{`
+          .bg {
+            background-color: #fff;
+          }
+          .coin-name {
+            margin-right: 15px;
+          }
+          .coin-symbol {
+            padding-top: 5px;
+            color: grey;
+          }
+        `}</style>
       </div>
     )
   }
@@ -75,23 +87,25 @@ class CoinPage extends Component {
       )
     }
     return this.props.coin.submitted_definitions.map((def, i) => {
-      return <TldrItem
-        key={def._id}
-        def_id={def._id}
-        coin_id={def.list_id}
-        downvotes={def.downvotes}
-        upvotes={def.upvotes}
-        text={def.text}
-        created_at={def.created_at}
-        no={i}
-      />
+      return <li key={def._id}>
+        <TldrItem
+          first={i === 0}
+          def_id={def._id}
+          coin_id={def.list_id}
+          downvotes={def.downvotes}
+          upvotes={def.upvotes}
+          text={def.text}
+          created_at={def.created_at}
+          no={i}
+        />
+      </li>
     })
   }
 
   render () {
     return (
       <Layout>
-        <div className='container-fluid'>
+        <div className='container py-3 bg'>
           {(!this.props.coin || this.props.fetchingCoin) ?
             <div>Fetching {this.props.url.query.symbol} data..</div>
             :
@@ -101,15 +115,24 @@ class CoinPage extends Component {
                 {this.renderStatus()}
               </div>
               <div className='col-md-8 pt-2'>
-                <TldrInput id={this.props.coin._id} coin_symbol={this.props.coin.symbol} />
-                {this.renderTldr()}
+                <TldrInput
+                  id={this.props.coin._id}
+                  coin_symbol={this.props.coin.symbol}
+                />
+                <ol>
+                  {this.renderTldr()}
+                </ol>
               </div>
             </div>
           }
         </div>
         <style jsx>{`
+          .bg {
+            background-color: #fff;
+          }
           .coin-name {
             margin-right: 15px;
+            padding-top: 7px;
           }
           .coin-symbol {
             color: grey;
