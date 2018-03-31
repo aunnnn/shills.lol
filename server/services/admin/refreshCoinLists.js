@@ -14,13 +14,6 @@ const refreshCoinLists = async (req, res) => {
         cmc_id: c.id,
         name: c.name,
         symbol: c.symbol,
-        rank: parseInt(c.rank),
-        price_usd: c.price_usd,
-        price_btc: c.price_btc,
-        market_cap_usd: c.market_cap_usd,
-        percent_change_24h: c.percent_change_24h,
-        percent_change_7d: c.percent_change_7d,
-        cmc_last_updated: c.last_updated,
       }
     }, {
       upsert: true

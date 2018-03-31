@@ -11,6 +11,7 @@ const getIntroLists = require('./server/services/getIntroLists')
 const addDefinition = require('./server/services/addDefinition')
 const voteDefinition = require('./server/services/voteDefinition')
 const getList = require('./server/services/getList')
+const getLatestCoinStatus = require('./server/services/getLatestCoinStatus')
 
 // Admin Services
 const refreshCoinLists = require('./server/services/admin/refreshCoinLists')
@@ -29,6 +30,8 @@ const server = router(
   safe(get)('/lists', getAllLists),
   safe(get)('/lists/:symbol', getList),
   safe(get)('/intro_lists', getIntroLists),
+  safe(get)('/status/:cmcid', getLatestCoinStatus),
+
   safe(post)('/definitions', addDefinition),
   safe(post)('/vote', voteDefinition),
 
