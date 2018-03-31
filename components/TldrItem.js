@@ -81,7 +81,7 @@ export default class extends Component {
     }
 
     return (
-      <div className='mb-3 pl-2'>
+      <div className='mb-1 pl-2'>
         <div className="d-flex flex-row align-items-center mb-2">
           <a onClick={() => this.vote('up')}>
             👍
@@ -98,16 +98,20 @@ export default class extends Component {
             👎
           </a>
         </div>
-        <h3>
+        <h2 className={this.props.first ? 'first' : ''}>
           "{this.props.text}"
-        </h3>
+        </h2>
         <label className="created-at">{moment(this.props.created_at).fromNow()}</label>
         <style jsx>{`
           a {
             cursor: pointer;
           }
-          h3 {
+          h2 {
             margin: 0;
+            font-size: 15px
+          }
+          h2.first {
+            font-size: 27px;
           }
           .progress {
             width: 200px;
@@ -117,6 +121,7 @@ export default class extends Component {
           }
           .created-at {
             font-size: 12px;
+            color: #999;
           }
         `}</style>
       </div>

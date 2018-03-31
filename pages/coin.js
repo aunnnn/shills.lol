@@ -52,6 +52,7 @@ class CoinPage extends Component {
     return this.props.coin.submitted_definitions.map((def, i) => {
       return <li key={def._id}>
         <TldrItem
+          first={i === 0}
           def_id={def._id}
           coin_id={def.list_id}
           downvotes={def.downvotes}

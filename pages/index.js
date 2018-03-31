@@ -28,7 +28,8 @@ class Index extends Component {
             <li key={`intro-${ind}`}>
               <Link href={`/coin?symbol=${list.symbol}`} prefetch>
                 <a className="link">
-                  <h2 className="text">{list.name} ({list.symbol}): "{topShill.text}"</h2>
+                  <h2 className="text">{list.name}{' '}
+                  <span className="symbol">{list.symbol}</span>: "{topShill.text}"</h2>
                   <p className="label">{list.definitions_count} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
                 </a>
               </Link>
@@ -47,6 +48,9 @@ class Index extends Component {
                   font-size: 10px;
                   margin-bottom: 5px;
                 }
+                .symbol {
+                  color: grey;
+                }
               `}</style>
             </li>
           )
@@ -56,7 +60,8 @@ class Index extends Component {
           <li key={`intro-${ind}`}>
             <Link href={`/coin?symbol=${list.symbol}`} prefetch>
               <a className="link">
-                <h2 className="text">{list.name} ({list.symbol}): <span className="insert-shill">-</span></h2>
+                <h2 className="text">{list.name}{' '}
+                <span className="symbol">{list.symbol}</span>: <span className="insert-shill">-</span></h2>
                 <p className="label">No shills yet, insert shill</p>
               </a>
             </Link>
@@ -77,6 +82,9 @@ class Index extends Component {
               }
               .insert-shill {
                 color: #999;
+              }
+              .symbol {
+                color: grey;
               }
             `}</style>
           </li>
