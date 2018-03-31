@@ -77,7 +77,7 @@ class Index extends Component {
                     {list.name}{' '}
                     <span className="symbol">{list.symbol}</span>: <span className="insert-shill">-</span>
                   </h2>
-                  <p className="label">No shills yet, insert shill</p>
+                  <p className="label">No shills yet, be the first shiller.</p>
                 </div>
               </a>
             </Link>
