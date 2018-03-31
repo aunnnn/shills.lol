@@ -14,7 +14,8 @@ const ListSchema = Schema({
   submitted_definitions: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Definition'
+      ref: 'Definition',
+      default: [],
     }
   ],
 
