@@ -27,7 +27,7 @@ class Index extends Component {
             <li key={`intro-${ind}`}>
               <Link href={`/coin?symbol=${list.symbol}`} prefetch>
                 <a className="link">
-                  <h2 className="text">{list.name} ({list.symbol}): {topShill.text}</h2>
+                  <h2 className="text">{list.name} ({list.symbol}): "{topShill.text}"</h2>
                   <p className="label">{list.submitted_definitions.length} shills | latest shill {moment(latestShill.updatedAt).fromNow()}</p>
                 </a>
               </Link>
@@ -86,10 +86,13 @@ class Index extends Component {
   render () {
     return (
       <Layout>
-        <ol>
+        <ol className="bg py-2">
           {this.renderIntroLists()}
         </ol>
         <style jsx>{`
+          .bg {
+            background-color: #fff;
+          }
           .header {
             font-weight: bold;
             border-bottom: 1px dashed #000;

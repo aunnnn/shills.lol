@@ -11,7 +11,7 @@ export default ({ children }) => (
     </Head>
     <div className='py-3'>
       <div className='container'>
-        <div className='row mb-2'>
+        <div className='row'>
           <div className='col-12'>
             <IndexHeader />
           </div>
@@ -19,6 +19,12 @@ export default ({ children }) => (
 
         {children}
       </div>
+      <style jsx global>{`
+        body {
+          background-color: #fafafa;
+        }
+      `}
+      </style>
     </div>
   </div>
 )

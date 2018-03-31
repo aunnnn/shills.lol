@@ -27,6 +27,7 @@ export default class extends Component {
             font-size: 16px;
             color: #fff;
             margin: 0;
+            cursor: pointer;
           }
         `}</style>
       </div>
