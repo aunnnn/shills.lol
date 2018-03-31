@@ -13,11 +13,15 @@ class CoinPage extends Component {
   }
 
   componentDidMount() {
+    const jquery = document.createElement("script");
+    jquery.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    jquery.async = false;
+
     const script = document.createElement("script");
-
     script.src = "https://files.coinmarketcap.com/static/widget/currency.js";
-    script.async = true;
+    script.async = false;
 
+    document.body.appendChild(jquery);
     document.body.appendChild(script);
   }
   
