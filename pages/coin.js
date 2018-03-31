@@ -75,7 +75,7 @@ class CoinPage extends Component {
             <div className='row'>
               {/* detail */}
               <div className='col-md-4'>
-                <div className='d-flex flex-row justify-content-start align-items-center'>
+                <div className='d-flex flex-row justify-content-start'>
                   <h1 className='coin-name'>{this.props.coin.name}</h1>
                   <h2 className='coin-symbol'>{this.props.coin.symbol}</h2>
                 </div>
@@ -112,6 +112,7 @@ class CoinPage extends Component {
             margin-right: 15px;
           }
           .coin-symbol {
+            padding-top: 7px;
             color: grey;
           }
         `}</style>
