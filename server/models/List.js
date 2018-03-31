@@ -8,6 +8,7 @@ const ListSchema = Schema({
   cmc_id: String,
   name: String,
   symbol: String,  
+  rank: Number,
 
   submitted_definitions: [
     {

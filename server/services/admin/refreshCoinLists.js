@@ -14,6 +14,7 @@ const refreshCoinLists = async (req, res) => {
         cmc_id: c.id,
         name: c.name,
         symbol: c.symbol,
+        rank: parseInt(c.rank),
       }
     }, {
       upsert: true
