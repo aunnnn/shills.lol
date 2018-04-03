@@ -8,8 +8,7 @@ const getList = async (req, res) => {
     path: 'submitted_definitions', 
     model: 'Definition',
     options: {
-      sort: { upvotes: -1 },
-      limit: 25,
+      sort: { upvotes: -1 }
     }
   }).exec()
 
