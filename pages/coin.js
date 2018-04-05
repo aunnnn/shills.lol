@@ -7,25 +7,61 @@ import APIService from '../utils/APIService'
 
 class CoinPage extends Component {
 
-  static async getInitialProps ({ store, query }) {
+
+  sharedWidget = null
+
+  static async getInitialProps({ store, query }) {
     await store.dispatch(getList(query.symbol))
     return {}
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.embedWidgetIfNeeded()
   }
 
   componentDidMount() {
     const jquery = document.createElement("script");
     jquery.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
     jquery.async = false;
-
-    const script = document.createElement("script");
-    script.src = "https://files.coinmarketcap.com/static/widget/currency.js";
-    script.async = false;
+    jquery.id = "shills-jquery-script"
 
     document.body.appendChild(jquery);
-    document.body.appendChild(script);
+
+    this.embedWidgetIfNeeded()
+  }
+
+  embedWidgetIfNeeded = () => {
+    if (this.sharedWidget) {
+      // current widget
+      if (this.sharedWidget.id !== `shills-cmc-widget-${this.props.coin.cmc_asset_id}`) {
+
+        this.sharedWidget.remove()
+
+        // need update
+        const script = document.createElement("script");
+        script.src = "https://files.coinmarketcap.com/static/widget/currency.js";
+        script.async = false;
+        script.id = `shills-cmc-widget-${this.props.coin.cmc_asset_id}`
+
+        this.sharedWidget = script
+
+        document.body.appendChild(script);
+      }
+    } else {
+      // first load
+      const script = document.createElement("script");
+      script.src = "https://files.coinmarketcap.com/static/widget/currency.js";
+      script.async = false;
+      script.id = `shills-cmc-widget-${this.props.coin.cmc_asset_id}`
+
+      this.sharedWidget = script
+
+      document.body.appendChild(script);
+    }
   }
 
   renderTickerWidget = () => {
+    console.log('widget render with  id', this.props.coin.cmc_asset_id)
     return (
       <div
         className="coinmarketcap-currency-widget"
@@ -102,7 +138,7 @@ class CoinPage extends Component {
     })
   }
 
-  render () {
+  render() {
     return (
       <Layout>
         <div className='container py-3 bg'>
