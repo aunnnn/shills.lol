@@ -1,43 +1,73 @@
-import { Component } from 'react'
+import { Component } from 'react'
 import Router from 'next/router'
 import axios from 'axios'
+import moment from 'moment'
 import fuzzy from '../utils/fuzzy'
 import API from '../utils/APIService'
+
+const COIN_LIST_CACHED_KEY = 'coins'
 
 export default class CoinsPicker extends Component {
   state = {
     coins: null,
     inputCoin: '',
-    fetchingCoins: true,
-    focused: false
+    fetchingCoins: false,
+    focused: false,
   }
 
-  componentDidMount () {
-    const coins = localStorage.getItem('coins')
+  prepareCoinListsForSearch = () => {
+    const cached = localStorage.getItem(COIN_LIST_CACHED_KEY)
 
-    if (coins) {
-      this.setState({
-        coins: JSON.parse(coins),
-        fetchingCoins: false
-      })
-
-      // Still update and set the cache
-      API.getAllLists()
-        .then(res => {
-          const coins = res.data.all_lists
-          localStorage.setItem('coins', JSON.stringify(coins))
-          console.log('Coins list is updated.')
-        })
-    } else {
-      API.getAllLists()
-        .then(res => {
-          const coins = res.data.all_lists
-          localStorage.setItem('coins', JSON.stringify(coins))
+    if (cached) {
+      const cachedObject = JSON.parse(cached)
+      // check cache format
+      if (cachedObject && cachedObject["coins"] !== "undefined" && cachedObject["cachedDate"] !== "undefined") {
+        if (moment.duration(moment().diff(cachedObject.cachedDate)).asDays > 7) {
+          // more than 7 days cache-> refetch
+          console.log('Outdated cache, update')
+          this.fetchCoinListsAndUpdateCache()
+        } else {
+          // Use cache
           this.setState({
-            coins,
-            fetchingCoins: false
+            coins: cachedObject.coins,
+            fetchingCoins: false,
           })
-        })
+          this.nameInput.focus()
+          console.log('Use cached.')
+        }
+      } else {
+        console.log('Invalid cached format.')
+        // invalid cache
+        this.fetchCoinListsAndUpdateCache()
+      }
+    } else {
+      console.log('No cache.')
+      // No cache
+      this.fetchCoinListsAndUpdateCache()
+    }
+  }
+
+  fetchCoinListsAndUpdateCache = () => {
+    API.getAllLists().then((res) => {
+      const lists = res.data.all_lists
+      localStorage.setItem(COIN_LIST_CACHED_KEY, JSON.stringify({
+        coins: lists,
+        cachedDate: moment(),
+      }))
+      this.setState({
+        coins: lists,
+        fetchingCoins: false,
+      })
+      this.nameInput.focus()
+    })
+  }
+
+  onClickInputBox = (e) => {
+    if (!this.state.coins && !this.state.fetchingCoins) {
+      this.setState({
+        fetchingCoins: true,
+      })
+      this.prepareCoinListsForSearch()
     }
   }
 
@@ -82,23 +112,21 @@ export default class CoinsPicker extends Component {
     }
   }
 
-  render () {
-    if (this.state.fetchingCoins) {
-      return 'Fetching those coins..'
-    }
-
+  render() {
     return (
       <div>
-        <div className='input-group'>
+        <div className='input-group' onClick={this.onClickInputBox}>
           <div className='input-group-prepend'>
             <div className='input-group-text'>🔎</div>
           </div>
           <input
+            ref={(input) => { this.nameInput = input; }} 
             type='text' className='form-control'
-            placeholder="Search coin"
+            placeholder={this.state.fetchingCoins ? "Loading coins..." : "Search coin"}
             value={this.state.inputCoin}
             onChange={this.changeText}
             onFocus={() => this.setState({ focused: true })}
+            disabled={this.state.fetchingCoins}
           />
         </div>
 

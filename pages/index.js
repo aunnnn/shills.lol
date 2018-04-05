@@ -25,7 +25,7 @@ class Index extends Component {
           const latestShill = list.submitted_definitions[list.submitted_definitions.length - 1]
           return (
             <li key={`intro-${ind}`} className="mb-1">
-              <Link href={`/coin?symbol=${list.symbol}`} prefetch>
+              <Link href={`/coin?symbol=${list.symbol}`}>
                 <a className="link">
                   <img
                     src={list.cmc_icon} width="30" height="30"
@@ -65,7 +65,7 @@ class Index extends Component {
 
         return (
           <li key={`intro-${ind}`} className="mb-1">
-            <Link href={`/coin?symbol=${list.symbol}`} prefetch>
+            <Link href={`/coin?symbol=${list.symbol}`}>
               <a className="link">
                 <img
                   src={list.cmc_icon} width="30" height="30"
